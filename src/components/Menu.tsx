@@ -1,7 +1,7 @@
 import React from "react";
 import {AppBar, Tab, Tabs} from "@material-ui/core";
 import Home from "../view/Home";
-import About from "../view/About";
+import ClientOrganizationListView from "../view/ClientOrganizationListView";
 import {Route, Switch, useHistory} from "react-router-dom";
 
 
@@ -16,12 +16,12 @@ export default function Menu() {
 
 	const PATH_ROUTES = {
 		"home": "/",
-		"about": "/about",
+		"clientOrganizationListView": "/clientOrganization/list",
 	}
 
 	const tab_position = [
 		PATH_ROUTES.home,
-		PATH_ROUTES.about
+		PATH_ROUTES.clientOrganizationListView
 	]
 
 	return (
@@ -29,13 +29,13 @@ export default function Menu() {
 			<AppBar position={"static"}>
 				<Tabs value={selectedTab} onChange={handleChange}>
 					<Tab label={"Home"}/>
-					<Tab label={"About"}/>
+					<Tab label={"Client organization list"}/>
 				</Tabs>
 			</AppBar>
 
 			<Switch>
 				<Route exact path={PATH_ROUTES.home} component={Home}/>
-				<Route path={PATH_ROUTES.about} component={About}/>
+				<Route path={PATH_ROUTES.clientOrganizationListView} component={ClientOrganizationListView}/>
 
 			</Switch>
 
