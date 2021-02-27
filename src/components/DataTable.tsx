@@ -25,7 +25,7 @@ export default function DataTable({headers, rows}: Props) {
 			<TableContainer component={Paper}>
 				<Table>
 					<TableHeader headers={headers}/>
-					<TableRows rows={rows}/>
+					<TableRows numberOfHeaderColumns={headers.length} rows={rows}/>
 				</Table>
 			</TableContainer>
 		</div>

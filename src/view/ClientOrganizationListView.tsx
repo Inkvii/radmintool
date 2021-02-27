@@ -14,7 +14,7 @@ async function fetchRows() {
 
 	let allRows: DataTableRow[] = []
 
-	jsonArray.map((row: { id: string; clientOrganizationName: string; doingBusinessAs: string; externalClientOrganizationId: string; }) => {
+	jsonArray.forEach((row: { id: string; clientOrganizationName: string; doingBusinessAs: string; externalClientOrganizationId: string; }) => {
 		let oneRow: DataTableRow = {
 			columns: [
 				{name: row.id, value: row.id, link: row.id},
@@ -24,7 +24,6 @@ async function fetchRows() {
 			]
 		}
 		allRows.push(oneRow)
-
 	});
 	console.log("Json is mapped to rows")
 	return allRows
@@ -33,7 +32,7 @@ async function fetchRows() {
 
 export default function ClientOrganizationListView() {
 
-	const [rows, setRows] = useState<DataTableRow[]>([{columns: []}])
+	const [rows, setRows] = useState<DataTableRow[]>([])
 
 	useEffect(() => {
 		const fetchMyPromise = async () => {

@@ -1,18 +1,18 @@
 import {TableBody, TableCell, TableRow} from "@material-ui/core";
-import React, {useState} from "react";
+import React from "react";
 import {DataTableCell, DataTableRow} from "../DataTable";
 import "../../css.css";
 import {useHistory} from "react-router-dom";
 import {PATH_ROUTES} from "../../routes";
 
 type Props = {
+	numberOfHeaderColumns: number
 	rows: DataTableRow[]
 }
 
-export default function TableRows({rows}: Props) {
+export default function TableRows({numberOfHeaderColumns, rows}: Props) {
 	const history = useHistory()
 
-	const [stateRows, setStateRows] = useState(rows)
 
 	const onCellClick = (value: DataTableCell) => {
 		console.log(`Cell clicked ${value.name} ${value.value} ${value.link}`)
@@ -24,8 +24,24 @@ export default function TableRows({rows}: Props) {
 	}
 
 
+	const getRows = () => {
+
+		if (rows.length < 1) {
+			return (
+				<TableRow>
+					<TableCell colSpan={numberOfHeaderColumns} align={"center"}>
+						Table is loading
+					</TableCell>
+				</TableRow>
+			)
+		}
+	}
+
 	return (
 		<TableBody>
+
+			{getRows()}
+
 			{rows.map((row, index) => (
 				<TableRow key={index}>
 					{
@@ -39,6 +55,7 @@ export default function TableRows({rows}: Props) {
 					}
 				</TableRow>
 			))}
+
 
 		</TableBody>
 	)
