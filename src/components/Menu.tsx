@@ -1,8 +1,7 @@
 import React from "react";
 import {AppBar, Tab, Tabs} from "@material-ui/core";
-import Home from "../view/Home";
-import ClientOrganizationListView from "../view/ClientOrganizationListView";
-import {Route, Switch, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
+import DeclaredRoutes, {PATH_ROUTES} from "../routes";
 
 
 export default function Menu() {
@@ -12,11 +11,6 @@ export default function Menu() {
 	const handleChange = (event: any, newValue: number) => {
 		setSelectedTab(newValue);
 		history.push(tab_position[newValue])
-	}
-
-	const PATH_ROUTES = {
-		"home": "/",
-		"clientOrganizationListView": "/clientOrganization/list",
 	}
 
 	const tab_position = [
@@ -33,11 +27,7 @@ export default function Menu() {
 				</Tabs>
 			</AppBar>
 
-			<Switch>
-				<Route exact path={PATH_ROUTES.home} component={Home}/>
-				<Route path={PATH_ROUTES.clientOrganizationListView} component={ClientOrganizationListView}/>
-
-			</Switch>
+			<DeclaredRoutes/>
 
 		</>
 	);

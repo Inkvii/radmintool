@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "clientOrganizationName": "Aral",
+    "doingBusinessAs": "Aral",
+    "externalClientOrganizationId": "992000200000"
+  },
+  {
+    "id": 2,
+    "clientOrganizationName": "real,-",
+    "doingBusinessAs": "real",
+    "externalClientOrganizationId": "9910001000000"
+  },
+  {
+    "id": 3,
+    "clientOrganizationName": "Orsay",
+    "doingBusinessAs": "Orsay gmbh.",
+    "externalClientOrganizationId": "98700567200060"
+  },
+  {
+    "id": 4,
+    "clientOrganizationName": "EasyShopper",
+    "doingBusinessAs": "EasyShopper",
+    "externalClientOrganizationId": "9750030000040"
+  }
+]
