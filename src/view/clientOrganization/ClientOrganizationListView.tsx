@@ -10,12 +10,20 @@ export default function ClientOrganizationListView() {
 
 	// async loading of table rows
 	useEffect(() => {
+		let isSubscribed = true
+
 		const fetchMyPromise = async () => {
 			const promise: DataTableRow[] = await fetchClientOrganizationListRows()
 			console.log("Promise is retrieved ")
-			setRows(promise)
+			if (isSubscribed) {
+				console.log("Component is still mounted, updating rows")
+				setRows(promise)
+			}
 		}
 		fetchMyPromise()
+		return () => {
+			isSubscribed = false
+		}
 	}, [])
 
 	return (
