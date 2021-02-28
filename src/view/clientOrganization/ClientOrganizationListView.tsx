@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Container} from "@material-ui/core";
 import DataTable, {DataTableRow} from "../../components/DataTable"
-import loadClientOrganizationList from "../../db/DatabaseConnector";
+import {loadClientOrganizationList} from "../../db/DatabaseConnector";
 
 export default function ClientOrganizationListView() {
 
