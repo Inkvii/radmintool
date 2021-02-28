@@ -1,4 +1,4 @@
-import {TableBody, TableCell, TableRow} from "@material-ui/core";
+import {CircularProgress, TableBody, TableCell, TableRow} from "@material-ui/core";
 import React from "react";
 import {DataTableCell, DataTableRow} from "../DataTable";
 import "../../css.css";
@@ -30,7 +30,7 @@ export default function TableRows({numberOfHeaderColumns, rows}: Props) {
 			return (
 				<TableRow>
 					<TableCell colSpan={numberOfHeaderColumns} align={"center"}>
-						Table is loading
+						<CircularProgress/>
 					</TableCell>
 				</TableRow>
 			)

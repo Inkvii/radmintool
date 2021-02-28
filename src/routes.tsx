@@ -1,7 +1,7 @@
 import {Route, Switch} from "react-router-dom";
 import Home from "./view/Home";
-import ClientOrganizationListView from "./view/ClientOrganizationListView";
-import ClientOrganizationDetail from "./view/ClientOrganizationDetail";
+import ClientOrganizationListView from "./view/clientOrganization/ClientOrganizationListView";
+import ClientOrganizationDetail from "./view/clientOrganization/clientOrganizationDetail/ClientOrganizationDetail";
 import React from "react";
 
 export const PATH_ROUTES = {

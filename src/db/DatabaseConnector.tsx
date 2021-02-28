@@ -1,6 +1,6 @@
-export default async function loadClientOrganizationList() {
+export default async function loadClientOrganizationList(delayRange: number = 1000, addedDelay: number = 1000) {
 
-	const timeToWait: number = Math.random() * 1000 + 1000
+	const timeToWait: number = Math.random() * delayRange + addedDelay
 	console.log("Will wait " + timeToWait)
 
 	const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
