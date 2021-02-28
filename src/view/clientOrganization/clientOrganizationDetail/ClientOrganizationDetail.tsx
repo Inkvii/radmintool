@@ -2,6 +2,7 @@ import {useParams} from "react-router-dom"
 import {Container} from "@material-ui/core";
 import React from "react";
 import BasicInfo from "./fragments/BasicInfo";
+import PartyProperties from "./fragments/PartyProperties";
 
 interface ParamTypes {
 	id: string
@@ -16,6 +17,7 @@ export default function ClientOrganizationDetail() {
 			<Container>
 				<h1>Client organization detail of id {id}</h1>
 				<BasicInfo id={parseInt(id)}/>
+				<PartyProperties/>
 			</Container>
 		</div>
 	)
