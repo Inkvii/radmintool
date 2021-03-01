@@ -15,7 +15,8 @@ export default function Menu() {
 
 	const tab_position = [
 		PATH_ROUTES.home,
-		PATH_ROUTES.clientOrganizationListView
+		PATH_ROUTES.clientOrganizationListView,
+		PATH_ROUTES.megaTableView
 	]
 
 	return (
@@ -24,6 +25,7 @@ export default function Menu() {
 				<Tabs value={selectedTab} onChange={handleChange}>
 					<Tab label={"Home"}/>
 					<Tab label={"Client organization list"}/>
+					<Tab label={"Mega table view"}/>
 				</Tabs>
 			</AppBar>
 
