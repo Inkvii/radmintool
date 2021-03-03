@@ -1,37 +1,85 @@
 import {Container} from "@material-ui/core";
 import {PATH_ROUTES} from "../routes";
-import TableListComponent from "../components/TableListComponent";
+import TableListComponent, {MyHeader} from "../components/TableListComponent";
+import {RowsProp} from "@material-ui/data-grid";
+
+
+const rawJson = {
+	headers: [
+		{
+			id: "id",
+			displayName: "Identificator",
+		},
+		{
+			id: "firstName",
+			displayName: "First name",
+		},
+		{
+			id: "lastName",
+			displayName: "Last name"
+		},
+		{
+			id: "phoneNumber",
+			displayName: "Phone number"
+		},
+		{
+			id: "age",
+			displayName: "Age"
+		},
+		{
+			id: "clientOrgId",
+			displayName: "Client Organization Ref",
+		}
+	],
+	rows: [
+		{
+			id: 4,
+			firstName: "First",
+			lastName: "Last",
+			phoneNumber: "+420123456789",
+			age: 69,
+			clientOrgId: 1
+		},
+		{
+			id: 5,
+			firstName: "Second",
+			lastName: "Laster",
+			phoneNumber: "+4201456789",
+			age: 13,
+			clientOrgId: 2
+		},
+		{
+			id: 6,
+			firstName: "Third",
+			lastName: "Lastest",
+			phoneNumber: "+420998",
+			age: 54,
+			clientOrgId: 3
+		},
+		{
+			id: 7,
+			firstName: "Fourth",
+			lastName: "Lasterer",
+			phoneNumber: "+42012364789",
+			age: 79,
+			clientOrgId: 4
+		}]
+}
 
 
 export default function MegaTableVIew() {
-	const jsonHeaders = [
-		{id: "id", displayName: "Ident of table", linkPath: PATH_ROUTES.clientOrganization},
-		{id: "name", displayName: "First name"},
-		{id: "clientOrgId", displayName: "Ref to clientOrg", linkPath: PATH_ROUTES.clientOrganization},
-	]
 
-	const jsonRows = [
-		{id: 12345, name: "very najs", clientOrgId: 1},
-		{id: 23456, name: "bjutifl", clientOrgId: 2},
-		{id: 34567, name: "dandy", clientOrgId: 3}
-	]
+	const jsonHeaders: MyHeader[] = rawJson.headers.map(singleHeader => {
+		if (["id", "clientOrgId"].includes(singleHeader.id)) {
+			return {...singleHeader, linkPath: PATH_ROUTES.clientOrganization}
+		} else return singleHeader
+	})
 
-
-	// 	[
-	// 	{id: 1, primaryKey: "10000", col1: 'Hello', col2: 'World'},
-	// 	{id: 2, primaryKey: "10001", col1: 'Hello', col2: 'World'},
-	// 	{id: 3, primaryKey: "10002", col1: 'Hello', col2: 'World'},
-	// 	{id: 4, primaryKey: "10003", col1: 'Hello', col2: 'World'},
-	// 	{id: 5, primaryKey: "5456", col1: 'Hello', col2: 'World'},
-	// 	{id: 6, primaryKey: "979751", col1: 'Hello', col2: 'World'},
-	// 	{id: 7, primaryKey: "096540", col1: 'Hello', col2: 'World'},
-	// 	{id: 8, primaryKey: "97972", col1: 'Hello', col2: 'World'},
-	// ];
 
 	return (
 		<Container>
 			<h1>Mega table view</h1>
-			<TableListComponent jsonRows={jsonRows} jsonHeaders={jsonHeaders}/>
+			<TableListComponent jsonRows={rawJson.rows as unknown as RowsProp[]} jsonHeaders={jsonHeaders}/>
 		</Container>
 	)
 }

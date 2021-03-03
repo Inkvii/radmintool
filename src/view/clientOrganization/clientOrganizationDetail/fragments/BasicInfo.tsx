@@ -1,4 +1,4 @@
-import {Card, CardContent, TableCell, TableContainer, TableRow} from "@material-ui/core";
+import {Card, CardContent, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core";
 import {useEffect, useState} from "react";
 import {loadClientOrganizationList} from "../../../../db/DatabaseConnector";
 
@@ -37,19 +37,22 @@ export default function BasicInfo({id}: Props) {
 			<CardContent>
 				<h2>Basic information about client organization {organization.clientOrganizationName}</h2>
 				<TableContainer>
-					<TableRow>
-						<TableCell>Id</TableCell>
-						<TableCell>{organization.id}</TableCell>
-					</TableRow>
-					<TableRow>
-						<TableCell>Doing business as</TableCell>
-						<TableCell>{organization.doingBusinessAs}</TableCell>
-					</TableRow>
-					<TableRow>
-						<TableCell>External client organization id</TableCell>
-						<TableCell>{organization.externalClientOrganizationId}</TableCell>
-					</TableRow>
-
+					<Table>
+						<TableBody>
+							<TableRow>
+								<TableCell>Id</TableCell>
+								<TableCell>{organization.id}</TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell>Doing business as</TableCell>
+								<TableCell>{organization.doingBusinessAs}</TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell>External client organization id</TableCell>
+								<TableCell>{organization.externalClientOrganizationId}</TableCell>
+							</TableRow>
+						</TableBody>
+					</Table>
 				</TableContainer>
 			</CardContent>
 		</Card>

@@ -3,25 +3,28 @@ import {CellParams, ColDef, DataGrid, RowsProp} from "@material-ui/data-grid";
 import {Button} from "@material-ui/core";
 
 
-interface MyHeader {
+export interface MyHeader {
 	id: string,
 	displayName: string,
 	linkPath?: string
 }
 
-interface MyRow {
-	id: string | number,
-	name: string,
-	clientOrgId: number
-}
-
 interface Props {
 	jsonHeaders: MyHeader[]
-	jsonRows: MyRow[],
+	jsonRows: RowsProp[],
 }
 
 export default function TableListComponent(props: Props) {
 	const history = useHistory()
+
+	// check for difference in header vs row length
+	props.jsonRows.forEach(row => {
+		if (Object.keys(row).length !== props.jsonHeaders.length) {
+			throw new Error(`Row [${Object.entries(row)}] has different number of columns than header`)
+		}
+	})
+
+	console.log(props.jsonRows)
 
 	const createButtonColumn = (field: string, headerName: string, linkToTarget: string) => {
 		const clickableColumnType: ColDef = {
@@ -57,15 +60,7 @@ export default function TableListComponent(props: Props) {
 		}
 	})
 
-	const rows: RowsProp = props.jsonRows.map(row => {
-		return {
-			id: row.id,
-			name: row.name,
-			clientOrgId: row.clientOrgId
-		}
-	})
-
 	return (
-		<DataGrid columns={columns} rows={rows} columnBuffer={5} autoHeight={true} pageSize={5}/>
+		<DataGrid columns={columns} rows={props.jsonRows} columnBuffer={5} autoHeight={true} pageSize={5}/>
 	)
 }

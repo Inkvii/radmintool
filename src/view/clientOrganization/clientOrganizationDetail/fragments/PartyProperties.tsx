@@ -59,8 +59,9 @@ export default function PartyProperties() {
 					<Grid item xs={9}>
 						{selectedIndex === 0 && (
 							<Box p={3}>
-								{partyPropertiesList.basicInfo.map((partyProperty: PartyProperty) => (
-									<TextField label={partyProperty.name} value={partyProperty.value} fullWidth={true} variant="outlined"
+								{partyPropertiesList.basicInfo.map((partyProperty: PartyProperty, index) => (
+									<TextField key={index} label={partyProperty.name} value={partyProperty.value} fullWidth={true}
+									           variant="outlined"
 									           margin="normal"/>
 								))}
 							</Box>
@@ -68,24 +69,27 @@ export default function PartyProperties() {
 						)}
 						{selectedIndex === 1 && (
 							<Box p={3}>
-								{partyPropertiesList.emailTemplates.map((partyProperty: PartyProperty) => (
-									<TextField label={partyProperty.name} value={partyProperty.value} fullWidth={true} variant="outlined"
+								{partyPropertiesList.emailTemplates.map((partyProperty: PartyProperty, index) => (
+									<TextField key={index} label={partyProperty.name} value={partyProperty.value} fullWidth={true}
+									           variant="outlined"
 									           margin="normal"/>
 								))}
 							</Box>
 						)}
 						{selectedIndex === 2 && (
 							<Box p={3}>
-								{partyPropertiesList.settlement.map((partyProperty: PartyProperty) => (
-									<TextField label={partyProperty.name} value={partyProperty.value} fullWidth={true} variant="outlined"
+								{partyPropertiesList.settlement.map((partyProperty: PartyProperty, index) => (
+									<TextField key={index} label={partyProperty.name} value={partyProperty.value} fullWidth={true}
+									           variant="outlined"
 									           margin="normal"/>
 								))}
 							</Box>
 						)}
 						{selectedIndex === 3 && (
 							<Box p={3}>
-								{partyPropertiesList.payout.map((partyProperty: PartyProperty) => (
-									<TextField label={partyProperty.name} value={partyProperty.value} fullWidth={true} variant="outlined"
+								{partyPropertiesList.payout.map((partyProperty: PartyProperty, index) => (
+									<TextField key={index} label={partyProperty.name} value={partyProperty.value} fullWidth={true}
+									           variant="outlined"
 									           margin="normal"/>
 								))}
 							</Box>
