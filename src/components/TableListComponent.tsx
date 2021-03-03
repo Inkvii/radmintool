@@ -31,8 +31,7 @@ export default function TableListComponent(props: Props) {
 			field: field,
 			headerName: headerName,
 			sortable: true,
-			// width: 300,
-
+			flex: 1,
 			disableClickEventBubbling: true,
 			renderCell: (params: CellParams) => (
 				<Button variant={"outlined"} color={"primary"}
@@ -55,7 +54,9 @@ export default function TableListComponent(props: Props) {
 			return {
 				type: "string",
 				field: header.id,
-				headerName: header.displayName
+				headerName: header.displayName,
+				flex: 1,
+
 			}
 		}
 	})
