@@ -5,27 +5,22 @@ import {Button} from "@material-ui/core";
 
 interface MyHeader {
 	id: string,
-	displayName: string
+	displayName: string,
+	linkPath?: string
 }
 
-interface MyRows {
+interface MyRow {
 	id: string | number,
 	name: string,
 	clientOrgId: number
 }
 
-interface ButtonColumns {
-	columnName: string,
-	linkPath: string
-}
-
 interface Props {
 	jsonHeaders: MyHeader[]
-	jsonRows: MyRows[],
-	buttonColumns: ButtonColumns[]
+	jsonRows: MyRow[],
 }
 
-export default function TableListComponent({jsonRows, jsonHeaders, buttonColumns}: Props) {
+export default function TableListComponent(props: Props) {
 	const history = useHistory()
 
 	const createButtonColumn = (field: string, headerName: string, linkToTarget: string) => {
@@ -33,7 +28,8 @@ export default function TableListComponent({jsonRows, jsonHeaders, buttonColumns
 			field: field,
 			headerName: headerName,
 			sortable: true,
-			width: 100,
+			// width: 300,
+
 			disableClickEventBubbling: true,
 			renderCell: (params: CellParams) => (
 				<Button variant={"outlined"} color={"primary"}
@@ -48,30 +44,20 @@ export default function TableListComponent({jsonRows, jsonHeaders, buttonColumns
 		return clickableColumnType
 	}
 
-	const columns: ColDef[] = jsonHeaders.map(header => {
+	const columns: ColDef[] = props.jsonHeaders.map(header => {
 
-		console.log(`Header ${header} has ${header.id}`)
-
-		buttonColumns.forEach(value => {
-			console.log(`Value ${value.columnName} compared to ${header.id}`)
-		})
-
-		const result = buttonColumns.find(value => value.columnName == header.id)
-
-		if (result !== null && result !== undefined) {
-			return createButtonColumn(result.columnName, header.displayName, result.linkPath)
+		if (header.linkPath !== undefined) {
+			return createButtonColumn(header.id, header.displayName, header.linkPath)
+		} else {
+			return {
+				type: "string",
+				field: header.id,
+				headerName: header.displayName
+			}
 		}
-
-
-		const instance: ColDef = {
-			type: "string",
-			field: header.id,
-			headerName: header.displayName
-		}
-		return instance
 	})
 
-	const rows: RowsProp = jsonRows.map(row => {
+	const rows: RowsProp = props.jsonRows.map(row => {
 		return {
 			id: row.id,
 			name: row.name,

@@ -5,9 +5,9 @@ import TableListComponent from "../components/TableListComponent";
 
 export default function MegaTableVIew() {
 	const jsonHeaders = [
-		{id: "id", displayName: "Ident of table"},
+		{id: "id", displayName: "Ident of table", linkPath: PATH_ROUTES.clientOrganization},
 		{id: "name", displayName: "First name"},
-		{id: "clientOrgId", displayName: "Ref to clientOrg"},
+		{id: "clientOrgId", displayName: "Ref to clientOrg", linkPath: PATH_ROUTES.clientOrganization},
 	]
 
 	const jsonRows = [
@@ -28,21 +28,10 @@ export default function MegaTableVIew() {
 	// 	{id: 8, primaryKey: "97972", col1: 'Hello', col2: 'World'},
 	// ];
 
-	const buttonColumns = [
-		{
-			columnName: "clientOrgId",
-			linkPath: PATH_ROUTES.clientOrganization
-		}, {
-			columnName: "id",
-			linkPath: PATH_ROUTES.clientOrganization
-		}
-	]
-
-
 	return (
 		<Container>
 			<h1>Mega table view</h1>
-			<TableListComponent jsonRows={jsonRows} jsonHeaders={jsonHeaders} buttonColumns={buttonColumns}/>
+			<TableListComponent jsonRows={jsonRows} jsonHeaders={jsonHeaders}/>
 		</Container>
 	)
 }
