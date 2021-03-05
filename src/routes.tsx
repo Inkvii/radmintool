@@ -1,9 +1,10 @@
 import {Route, Switch} from "react-router-dom";
-import Home from "./view/Home";
-import ClientOrganizationListView from "./view/clientOrganization/ClientOrganizationListView";
-import ClientOrganizationDetail from "./view/clientOrganization/clientOrganizationDetail/ClientOrganizationDetail";
+import Home from "./view/pages/Home";
+import ClientOrganizationListView from "./view/pages/clientOrganization/ClientOrganizationListView";
+import ClientOrganizationDetail
+	from "./view/pages/clientOrganization/clientOrganizationDetail/ClientOrganizationDetail";
 import React from "react";
-import MegaTableVIew from "./view/MegaTableVIew";
+import MegaTableVIew from "./view/pages/MegaTableVIew";
 
 export const PATH_ROUTES = {
 	"home": "/",

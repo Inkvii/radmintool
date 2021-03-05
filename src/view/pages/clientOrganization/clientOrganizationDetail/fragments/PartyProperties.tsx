@@ -1,6 +1,6 @@
 import {Box, Card, CardContent, Grid, Tab, Tabs, TextField} from "@material-ui/core";
 import React, {useEffect} from "react";
-import {loadPartyProperties} from "../../../../db/DatabaseConnector";
+import {loadPartyProperties} from "../../../../../db/DatabaseConnector";
 
 interface PartyProperty {
 	name: string,

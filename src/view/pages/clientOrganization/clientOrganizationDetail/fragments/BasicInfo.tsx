@@ -1,6 +1,6 @@
 import {Card, CardContent, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core";
 import {useEffect, useState} from "react";
-import {loadClientOrganizationList} from "../../../../db/DatabaseConnector";
+import {loadClientOrganizationList} from "../../../../../db/DatabaseConnector";
 
 interface Props {
 	id: number

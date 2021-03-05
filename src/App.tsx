@@ -1,15 +1,20 @@
 import './App.css';
 import React from "react";
-import Menu from "./components/Menu";
+import Header from "./view/header/Header";
+import {CssBaseline} from "@material-ui/core";
+import {BrowserRouter} from "react-router-dom";
+import DeclaredRoutes from "./routes";
 
-export function App() {
+
+export default function App() {
 	return (
 		<div>
-			<Menu/>
-
+			<CssBaseline/>
+			<BrowserRouter>
+				<Header/>
+				<DeclaredRoutes/>
+			</BrowserRouter>
 		</div>
 	);
 }
 
-
-export default App;
