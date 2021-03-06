@@ -23,6 +23,7 @@ export default function SearchBar() {
 	} = useAutocomplete({
 		options: top100Films,
 		getOptionLabel: (option) => option.title,
+		getOptionSelected: (option, value) => option.title === value.title
 	});
 
 	useEffect(() => {
