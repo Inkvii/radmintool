@@ -1,7 +1,7 @@
-import {SearchIcon} from "@material-ui/data-grid";
-import {createStyles, Grid, makeStyles, TextField, Theme} from "@material-ui/core";
+import {createStyles, Grid, InputBase, makeStyles, Theme} from "@material-ui/core";
 import React from "react";
-import {Autocomplete} from "@material-ui/lab";
+import {useAutocomplete} from "@material-ui/lab";
+import {SearchIcon} from "@material-ui/data-grid";
 
 interface MySuggestions {
 	title: string,
@@ -21,6 +21,16 @@ export default function SearchBar() {
 		{title: "Schindler's List", year: 1993}
 	]
 
+	const {
+		getRootProps,
+		getInputProps,
+		getListboxProps,
+		getOptionProps,
+		groupedOptions,
+	} = useAutocomplete({
+		options: top100Films,
+		getOptionLabel: (option) => option.title,
+	});
 
 	return (
 		<Grid container>
@@ -28,25 +38,59 @@ export default function SearchBar() {
 				<SearchIcon className={classes.searchIcon}/>
 			</Grid>
 			<Grid item xs>
-				<Autocomplete
-					id="combo-box-demo"
-					className={classes.field}
-					options={top100Films}
-					getOptionLabel={(option) => option.title}
-					renderInput={(params) => <TextField {...params} variant="outlined" size={"small"}/>}
-				/>
+				<div {...getRootProps()}>
+					<InputBase className={classes.input} {...getInputProps()} />
+				</div>
+				{groupedOptions.length > 0 ? (
+					<ul className={classes.listbox} {...getListboxProps()}>
+						{groupedOptions.map((option, index) => (
+							<li {...getOptionProps({option, index})}>{option.title}</li>
+						))}
+					</ul>
+				) : null}
 			</Grid>
 		</Grid>
 	)
 }
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
-	field: {
-		color: "inherit"
-	},
 	searchIcon: {
 		height: '100%',
 		pointerEvents: 'none',
 	},
+
+	input: {
+		color: "#ffffff",
+		backgroundColor: theme.palette.primary.light,
+		paddingLeft: 10,
+		paddingRight: 10,
+		width: "100%",
+		borderRadius: 7,
+		border: "none"
+
+	},
+	listbox: {
+		width: 500,
+		margin: 0,
+		padding: 0,
+		zIndex: 1,
+		position: 'absolute',
+		listStyle: 'none',
+		color: "#000",
+		backgroundColor: "#ffffff",
+		overflow: 'hidden',
+		maxHeight: 200,
+		border: '1px solid rgba(0,0,0,.25)',
+		'& li[data-focus="true"]': {
+			backgroundColor: '#4a8df6',
+			color: 'white',
+			cursor: 'pointer',
+		},
+		'& li:active': {
+			backgroundColor: '#2977f5',
+			color: 'white',
+		},
+	},
+
 
 }))

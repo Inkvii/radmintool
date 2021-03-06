@@ -17,7 +17,7 @@ export default function Menu() {
 
 	return (
 		<>
-			<AppBar position={"static"}>
+			<AppBar position={"static"} color={"primary"}>
 				<Toolbar>
 					<IconButton edge="start" color="inherit" aria-label="menu">
 						<MenuIcon/>
