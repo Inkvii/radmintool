@@ -10,19 +10,23 @@ import MegaTableVIew from "./view/pages/MegaTableVIew";
 export const PATH_ROUTES = {
 	"home": {
 		uri: "/",
-		displayName: "Dashboard"
+		displayName: "Dashboard",
+		searchable: true
 	},
 	"clientOrganizationListView": {
 		uri: "/clientOrganization/list",
-		displayName: "Client organizations"
+		displayName: "Client organizations",
+		searchable: true
 	},
 	"clientOrganization": {
 		uri: "/clientOrganization",
-		displayName: "Detail view of one client organization"
+		displayName: "Detail view of one client organization",
+		searchable: false
 	},
 	"megaTableView": {
 		uri: "/megaTableView",
-		displayName: "Component of data grid"
+		displayName: "Component of data grid",
+		searchable: true
 	}
 }
 
