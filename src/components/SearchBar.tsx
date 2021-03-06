@@ -8,54 +8,9 @@ interface MySuggestions {
 	year: number
 }
 
-
 export default function SearchBar() {
 
 	const [searchBarWidth, setSearchBarWidth] = useState<number>(100)
-
-
-	const useStyles = makeStyles((theme: Theme) => createStyles({
-		searchIcon: {
-			height: '100%',
-			pointerEvents: 'none',
-		},
-
-		input: {
-			color: "#ffffff",
-			backgroundColor: theme.palette.primary.light,
-			paddingLeft: 10,
-			paddingRight: 10,
-			width: "100%",
-			borderRadius: 7,
-			border: "none"
-
-		},
-		listbox: {
-			width: searchBarWidth,
-			margin: 0,
-			padding: 0,
-			zIndex: 1,
-			position: 'absolute',
-			listStyle: 'none',
-			color: "#000",
-			backgroundColor: "#ffffff",
-			overflow: 'auto',
-			maxHeight: 400,
-			border: '1px solid rgba(0,0,0,.25)',
-			'& li[data-focus="true"]': {
-				backgroundColor: '#4a8df6',
-				color: 'white',
-				cursor: 'pointer',
-			},
-			'& li:active': {
-				backgroundColor: '#2977f5',
-				color: 'white',
-			},
-		},
-
-
-	}))
-
 	const classes = useStyles()
 	const searchbarRef = useRef<HTMLInputElement>(null)
 
@@ -86,7 +41,7 @@ export default function SearchBar() {
 					<InputBase className={classes.input} {...getInputProps()}/>
 				</div>
 				{groupedOptions.length > 0 ? (
-					<ul className={classes.listbox} {...getListboxProps()}>
+					<ul className={classes.listbox} style={{width: searchBarWidth}} {...getListboxProps()}>
 						{groupedOptions.map((option, index) => (
 							<li {...getOptionProps({option, index})}>
 								<div>
@@ -109,6 +64,46 @@ export default function SearchBar() {
 	)
 }
 
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	searchIcon: {
+		height: '100%',
+		pointerEvents: 'none',
+	},
+
+	input: {
+		color: "#ffffff",
+		backgroundColor: theme.palette.primary.light,
+		paddingLeft: 10,
+		paddingRight: 10,
+		width: "100%",
+		borderRadius: 7,
+		border: "none"
+
+	},
+	listbox: {
+		margin: 0,
+		padding: 0,
+		zIndex: 1,
+		position: 'absolute',
+		listStyle: 'none',
+		color: "#000",
+		backgroundColor: "#ffffff",
+		overflow: 'auto',
+		maxHeight: 400,
+		border: '1px solid rgba(0,0,0,.25)',
+		'& li[data-focus="true"]': {
+			backgroundColor: '#4a8df6',
+			color: 'white',
+			cursor: 'pointer',
+		},
+		'& li:active': {
+			backgroundColor: '#2977f5',
+			color: 'white',
+		},
+	},
+
+
+}))
 
 const top100Films: MySuggestions[] = [
 	{title: 'The Shawshank Redemption', year: 1994},
