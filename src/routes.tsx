@@ -6,20 +6,34 @@ import ClientOrganizationDetail
 import React from "react";
 import MegaTableVIew from "./view/pages/MegaTableVIew";
 
+
 export const PATH_ROUTES = {
-	"home": "/",
-	"clientOrganizationListView": "/clientOrganization/list",
-	"clientOrganization": "/clientOrganization",
-	"megaTableView": "/megaTableView"
+	"home": {
+		uri: "/",
+		displayName: "Dashboard"
+	},
+	"clientOrganizationListView": {
+		uri: "/clientOrganization/list",
+		displayName: "Client organizations"
+	},
+	"clientOrganization": {
+		uri: "/clientOrganization",
+		displayName: "Detail view of one client organization"
+	},
+	"megaTableView": {
+		uri: "/megaTableView",
+		displayName: "Component of data grid"
+	}
 }
+
 
 export default function DeclaredRoutes() {
 	return (
 		<Switch>
-			<Route exact path={PATH_ROUTES.home} component={Home}/>
-			<Route path={PATH_ROUTES.clientOrganizationListView} component={ClientOrganizationListView}/>
-			<Route path={PATH_ROUTES.clientOrganization + "/:id"} component={ClientOrganizationDetail}/>
-			<Route path={PATH_ROUTES.megaTableView} component={MegaTableVIew}/>
+			<Route exact path={PATH_ROUTES.home.uri} component={Home}/>
+			<Route path={PATH_ROUTES.clientOrganizationListView.uri} component={ClientOrganizationListView}/>
+			<Route path={PATH_ROUTES.clientOrganization.uri + "/:id"} component={ClientOrganizationDetail}/>
+			<Route path={PATH_ROUTES.megaTableView.uri} component={MegaTableVIew}/>
 		</Switch>
 	)
 }

@@ -71,7 +71,7 @@ export default function MegaTableVIew() {
 
 	const jsonHeaders: MyHeader[] = rawJson.headers.map(singleHeader => {
 		if (["id", "clientOrgId"].includes(singleHeader.id)) {
-			return {...singleHeader, linkPath: PATH_ROUTES.clientOrganization}
+			return {...singleHeader, linkPath: PATH_ROUTES.clientOrganization.uri}
 		} else return singleHeader
 	})
 
