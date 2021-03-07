@@ -1,9 +1,10 @@
-import './App.css';
-import React from "react";
-import Header from "./view/header/Header";
-import {CssBaseline} from "@material-ui/core";
-import {BrowserRouter} from "react-router-dom";
-import DeclaredRoutes from "./routes";
+import './App.css'
+import React from "react"
+import Header from "./view/header/Header"
+import {CssBaseline, MuiThemeProvider} from "@material-ui/core"
+import {BrowserRouter} from "react-router-dom"
+import DeclaredRoutes from "./routes"
+import lightTheme from "theme/LightTheme"
 
 
 export default function App() {
@@ -11,10 +12,13 @@ export default function App() {
 		<div>
 			<CssBaseline/>
 			<BrowserRouter>
-				<Header/>
-				<DeclaredRoutes/>
+				<MuiThemeProvider theme={lightTheme}>
+					<Header/>
+
+					<DeclaredRoutes/>
+				</MuiThemeProvider>
 			</BrowserRouter>
 		</div>
-	);
+	)
 }
 

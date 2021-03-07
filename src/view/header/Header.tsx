@@ -1,10 +1,11 @@
 import Menu from "components/Menu"
+import React from "react"
+import headerTheme from "theme/HeaderTheme"
 import {MuiThemeProvider} from "@material-ui/core"
-import theme from "theme/HeaderTheme"
 
 export default function Header() {
 	return (
-		<MuiThemeProvider theme={theme}>
+		<MuiThemeProvider theme={headerTheme}>
 			<Menu/>
 		</MuiThemeProvider>
 	)

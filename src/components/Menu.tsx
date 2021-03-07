@@ -16,29 +16,27 @@ export default function Menu() {
 	}
 
 	return (
-		<>
-			<AppBar position={"static"} color={"primary"}>
-				<Toolbar>
-					<IconButton edge="start" color="inherit" aria-label="menu">
-						<MenuIcon/>
-					</IconButton>
-					<Grid container>
-						<Grid item xs={6}>
-							{createButtonLink(PATH_ROUTES.home)}
-							{createButtonLink(PATH_ROUTES.clientOrganizationListView)}
-							{createButtonLink(PATH_ROUTES.megaTableView)}
-						</Grid>
-						<Grid item xs>
-							<SearchBar/>
-						</Grid>
+		<AppBar position={"static"} color={"primary"}>
+			<Toolbar>
+				<IconButton edge="start" color="inherit" aria-label="menu">
+					<MenuIcon/>
+				</IconButton>
+				<Grid container>
+					<Grid item xs={6}>
+						{createButtonLink(PATH_ROUTES.home)}
+						{createButtonLink(PATH_ROUTES.clientOrganizationListView)}
+						{createButtonLink(PATH_ROUTES.megaTableView)}
 					</Grid>
-					<IconButton edge={"end"} color={"inherit"}>
-						<AccountCircle/>
-					</IconButton>
-				</Toolbar>
-			</AppBar>
-		</>
-	);
+					<Grid item xs>
+						<SearchBar/>
+					</Grid>
+				</Grid>
+				<IconButton edge={"end"} color={"inherit"}>
+					<AccountCircle/>
+				</IconButton>
+			</Toolbar>
+		</AppBar>
+	)
 }
 
 
