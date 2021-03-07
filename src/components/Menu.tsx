@@ -1,10 +1,10 @@
-import React from "react";
-import {AppBar, Button, Grid, IconButton, Toolbar} from "@material-ui/core";
-import {Link} from "react-router-dom";
-import {PATH_ROUTES} from "../routes";
-import {MenuIcon} from "@material-ui/data-grid";
-import {AccountCircle} from "@material-ui/icons";
-import SearchBar from "./SearchBar";
+import React from "react"
+import {AppBar, Button, Grid, IconButton, Toolbar} from "@material-ui/core"
+import {Link} from "react-router-dom"
+import {PATH_ROUTES} from "routes"
+import {MenuIcon} from "@material-ui/data-grid"
+import {AccountCircle} from "@material-ui/icons"
+import SearchBar from "components/SearchBar"
 
 
 export default function Menu() {

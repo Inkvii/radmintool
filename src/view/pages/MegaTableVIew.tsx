@@ -1,8 +1,8 @@
-import {Container} from "@material-ui/core";
-import {PATH_ROUTES} from "../../routes";
-import TableListComponent, {MyHeader} from "../../components/TableListComponent";
-import {RowsProp} from "@material-ui/data-grid";
-import SearchBar from "../../components/SearchBar";
+import {Container} from "@material-ui/core"
+import {PATH_ROUTES} from "routes"
+import TableListComponent, {MyHeader} from "components/TableListComponent"
+import {RowsProp} from "@material-ui/data-grid"
+import SearchBar from "components/SearchBar"
 
 
 const rawJson = {

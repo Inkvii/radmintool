@@ -1,9 +1,9 @@
-import {createStyles, Grid, InputBase, makeStyles, Theme, Typography} from "@material-ui/core";
-import React, {useEffect, useRef, useState} from "react";
-import {useAutocomplete} from "@material-ui/lab";
-import {SearchIcon} from "@material-ui/data-grid";
-import {PATH_ROUTES} from "../routes";
+import {createStyles, Grid, InputBase, makeStyles, Theme, Typography} from "@material-ui/core"
+import React, {useEffect, useRef, useState} from "react"
+import {useAutocomplete} from "@material-ui/lab"
+import {SearchIcon} from "@material-ui/data-grid"
 import {Link} from "react-router-dom"
+import {PATH_ROUTES} from "routes"
 
 export default function SearchBar() {
 
@@ -28,12 +28,12 @@ export default function SearchBar() {
 		onClose: () => {
 			setOpened(false)
 		}
-	});
+	})
 
 	useEffect(() => {
 		//since we are using Grid, we need to setup dropdown listbox's width after SearchBar is rendered by parent
 		if (searchbarRef && searchbarRef.current) {
-			setSearchBarWidth(searchbarRef.current.offsetWidth);
+			setSearchBarWidth(searchbarRef.current.offsetWidth)
 		}
 	}, [searchbarRef])
 

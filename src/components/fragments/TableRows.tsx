@@ -1,9 +1,9 @@
-import {CircularProgress, TableBody, TableCell, TableRow} from "@material-ui/core";
-import React from "react";
-import {DataTableCell, DataTableRow} from "../DataTable";
-import "../../css.css";
-import {useHistory} from "react-router-dom";
-import {PATH_ROUTES} from "../../routes";
+import {CircularProgress, TableBody, TableCell, TableRow} from "@material-ui/core"
+import React from "react"
+import {DataTableCell, DataTableRow} from "components/DataTable"
+import "css.css"
+import {useHistory} from "react-router-dom"
+import {PATH_ROUTES} from "routes"
 
 type Props = {
 	numberOfHeaderColumns: number
@@ -18,7 +18,7 @@ export default function TableRows({numberOfHeaderColumns, rows}: Props) {
 		console.log(`Cell clicked ${value.name} ${value.value} ${value.link}`)
 
 		if (value.link !== undefined) {
-			history.push(PATH_ROUTES.clientOrganization + "/" + value.link);
+			history.push(PATH_ROUTES.clientOrganization + "/" + value.link)
 
 		}
 	}

@@ -1,7 +1,7 @@
-import React from "react";
-import {Paper, Table, TableContainer} from "@material-ui/core";
-import TableHeader from "./fragments/TableHeader";
-import TableRows from "./fragments/TableRows";
+import React from "react"
+import {Paper, Table, TableContainer} from "@material-ui/core"
+import TableHeader from "components/fragments/TableHeader"
+import TableRows from "components/fragments/TableRows"
 
 export type DataTableCell = {
 	name: string,
