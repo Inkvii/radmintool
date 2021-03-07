@@ -1,11 +1,15 @@
-import {Route, Switch} from "react-router-dom";
-import Home from "./view/pages/Home";
-import ClientOrganizationListView from "./view/pages/clientOrganization/ClientOrganizationListView";
-import ClientOrganizationDetail
-	from "./view/pages/clientOrganization/clientOrganizationDetail/ClientOrganizationDetail";
-import React from "react";
-import MegaTableVIew from "./view/pages/MegaTableVIew";
+import {Route, Switch} from "react-router-dom"
+import Home from "./view/pages/Home"
+import ClientOrganizationListView from "./view/pages/clientOrganization/ClientOrganizationListView"
+import ClientOrganizationDetail from "./view/pages/clientOrganization/clientOrganizationDetail/ClientOrganizationDetail"
+import React from "react"
+import MegaTableVIew from "./view/pages/MegaTableVIew"
 
+export type PathRoute = {
+	uri: string,
+	displayName: string,
+	searchable: boolean
+}
 
 export const PATH_ROUTES = {
 	"home": {

@@ -4,7 +4,7 @@ import {Link} from "react-router-dom"
 import {PATH_ROUTES} from "routes"
 import {MenuIcon} from "@material-ui/data-grid"
 import {AccountCircle} from "@material-ui/icons"
-import SearchBar from "components/SearchBar"
+import CustomSearchBar from "components/CustomSearchBar"
 
 
 export default function Menu() {
@@ -29,7 +29,7 @@ export default function Menu() {
 							{createButtonLink(PATH_ROUTES.megaTableView)}
 						</Grid>
 						<Grid item xs>
-							<SearchBar/>
+							<CustomSearchBar/>
 						</Grid>
 					</Grid>
 					<IconButton edge={"end"} color={"inherit"}>
