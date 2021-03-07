@@ -1,6 +1,6 @@
 import React from 'react'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-import {Grid, TextField, Typography} from "@material-ui/core"
+import {createStyles, Grid, makeStyles, TextField, Theme, Typography} from "@material-ui/core"
 import {PATH_ROUTES, PathRoute} from "routes"
 import {useHistory} from "react-router-dom"
 
@@ -26,7 +26,7 @@ import {useHistory} from "react-router-dom"
 export default function SearchBar() {
 	const options = Object.values(PATH_ROUTES).filter(value => value.searchable)
 	const history = useHistory()
-	// const classes = useStyles()
+	const classes = useStyles()
 
 	const [selectedValue, setSelectedValue] = React.useState<PathRoute | null>(options[0])
 	const [inputValue, setInputValue] = React.useState('')
@@ -45,6 +45,7 @@ export default function SearchBar() {
 			onInputChange={(event, newInputValue) => {
 				setInputValue(newInputValue)
 			}}
+			classes={{listbox: classes.myListbox}}
 			options={options} // list of suggestions in the dropdown list
 			getOptionSelected={(option, value) => option.displayName === value.displayName} //probably equals() method
 			getOptionLabel={(option => option.displayName)} // what will be seen in input box after option is selected
@@ -70,6 +71,10 @@ export default function SearchBar() {
 	)
 }
 
-// const useStyles = makeStyles((theme: Theme) => createStyles({
-//
-// }))
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	myListbox: {
+		backgroundColor: theme.palette.primary.light,
+		color: "#FFF",
+		borderRadius: 0,
+	},
+}))
