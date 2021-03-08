@@ -3,7 +3,7 @@ import Home from "./view/pages/Home"
 import ClientOrganizationListView from "./view/pages/clientOrganization/ClientOrganizationListView"
 import ClientOrganizationDetail from "./view/pages/clientOrganization/clientOrganizationDetail/ClientOrganizationDetail"
 import React from "react"
-import MegaTableVIew from "./view/pages/MegaTableVIew"
+import DatagridTableView from "view/pages/DatagridTableView"
 import ReduxCounterExample from "view/pages/ReduxCounterExample"
 
 export type PathRoute = {
@@ -28,8 +28,8 @@ export const PATH_ROUTES = {
 		displayName: "Detail view of one client organization",
 		searchable: false
 	},
-	"megaTableView": {
-		uri: "/megaTableView",
+	"datagridTableView": {
+		uri: "/datagridTableView",
 		displayName: "Component of data grid",
 		searchable: true
 	},
@@ -47,7 +47,7 @@ export default function DeclaredRoutes() {
 			<Route exact path={PATH_ROUTES.home.uri} component={Home}/>
 			<Route path={PATH_ROUTES.clientOrganizationListView.uri} component={ClientOrganizationListView}/>
 			<Route path={PATH_ROUTES.clientOrganization.uri + "/:id"} component={ClientOrganizationDetail}/>
-			<Route path={PATH_ROUTES.megaTableView.uri} component={MegaTableVIew}/>
+			<Route path={PATH_ROUTES.datagridTableView.uri} component={DatagridTableView}/>
 			<Route path={PATH_ROUTES.reduxCounterExample.uri} component={ReduxCounterExample}/>
 		</Switch>
 	)

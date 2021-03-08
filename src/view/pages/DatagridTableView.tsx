@@ -1,4 +1,4 @@
-import {Container, TextField} from "@material-ui/core"
+import {Container} from "@material-ui/core"
 import {PATH_ROUTES} from "routes"
 import TableListComponent, {MyHeader} from "components/TableListComponent"
 import {RowsProp} from "@material-ui/data-grid"
@@ -67,7 +67,7 @@ const rawJson = {
 }
 
 
-export default function MegaTableVIew() {
+export default function DatagridTableView() {
 
 	const jsonHeaders: MyHeader[] = rawJson.headers.map(singleHeader => {
 		if (["id", "clientOrgId"].includes(singleHeader.id)) {
@@ -78,10 +78,7 @@ export default function MegaTableVIew() {
 
 	return (
 		<Container>
-			<h2>test</h2>
-			<TextField variant={"outlined"} fullWidth/>
-			<h1>Mega table view</h1>
-
+			<h1>Datagrid table view</h1>
 			<TableListComponent jsonRows={rawJson.rows as unknown as RowsProp[]} jsonHeaders={jsonHeaders}/>
 		</Container>
 	)
