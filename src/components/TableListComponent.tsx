@@ -1,16 +1,16 @@
-import {useHistory} from "react-router-dom";
-import {CellParams, ColDef, DataGrid, RowsProp} from "@material-ui/data-grid";
-import {Button} from "@material-ui/core";
+import {useHistory} from "react-router-dom"
+import {CellParams, ColDef, DataGrid, RowsProp} from "@material-ui/data-grid"
+import {Button} from "@material-ui/core"
 
 
-export interface MyHeader {
+export interface TableListComponentHeader {
 	id: string,
 	displayName: string,
 	linkPath?: string
 }
 
 interface Props {
-	jsonHeaders: MyHeader[]
+	jsonHeaders: TableListComponentHeader[]
 	jsonRows: RowsProp[],
 }
 
