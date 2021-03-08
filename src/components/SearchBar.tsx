@@ -4,25 +4,6 @@ import {createStyles, Grid, makeStyles, TextField, Theme, Typography} from "@mat
 import {PATH_ROUTES, PathRoute} from "routes"
 import {useHistory} from "react-router-dom"
 
-
-// const StyledTextField = styled(TextField)`
-// 	.MuiInput-root {
-// 		padding-left: 10px;
-//
-// 	}
-// 	.MuiInputBase-input {
-// 		color: white;
-// 	}
-//
-// 	.MuiOutlinedInput-root {
-// 		background-color:  rgb(194,47,47);
-//     fieldset {
-//       border: none;
-//     }
-//   }
-//
-// ` as typeof TextField
-
 export default function SearchBar() {
 	const options = Object.values(PATH_ROUTES).filter(value => value.searchable)
 	const history = useHistory()
