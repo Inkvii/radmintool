@@ -2,6 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Used technologies
+
+* Material UI - for styling design
+* Redux - for global state management
+* Redux toolkit - for making work with redux much easier
+* Chart.js - graphs library
+* React router dom - for creating and managing paths in the application
+* styled-components - for further modifying of Material UI design if its necessary to do it on lowest level
+* typescript - because pure javascript suxs
+* axios - for asynchronous communication with backend
+
 ## Available Scripts
 
 In the project directory, you can run:

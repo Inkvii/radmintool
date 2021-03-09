@@ -1,41 +1,16 @@
 import {Card, CardContent, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core"
-import {useEffect, useState} from "react"
-import {loadClientOrganizationList} from "db/DatabaseConnector"
+import {ClientOrganization} from "view/pages/clientOrganization/clientOrganizationDetail/interfaces"
 
 interface Props {
-	id: number
+	organization: ClientOrganization
 }
 
-interface ClientOrganization {
-	"id": number,
-	"clientOrganizationName": string,
-	"doingBusinessAs": string,
-	"externalClientOrganizationId": string
-}
-
-export default function BasicInfo({id}: Props) {
-
-	const [organization, setOrganization] = useState<ClientOrganization>({
-		id: 0,
-		clientOrganizationName: "",
-		externalClientOrganizationId: "",
-		doingBusinessAs: ""
-	})
-
-	useEffect(() => {
-		const fetchMyPromise = async () => {
-			const promise: ClientOrganization = await fetchClientOrganization(id)
-			console.log("Promise is retrieved " + promise)
-			setOrganization(promise)
-		}
-		fetchMyPromise()
-	}, [id])
-
+export default function BasicInfo({organization}: Props) {
 
 	return (
 		<Card>
 			<CardContent>
-				<h2>Basic information about client organization {organization.clientOrganizationName}</h2>
+				<h2>Basic information about client organization {organization.externalClientOrganizationId}</h2>
 				<TableContainer>
 					<Table>
 						<TableBody>
@@ -57,13 +32,4 @@ export default function BasicInfo({id}: Props) {
 			</CardContent>
 		</Card>
 	)
-}
-
-
-async function fetchClientOrganization(id: number): Promise<ClientOrganization> {
-	console.log("Starting to fetch row")
-	// Im lazy to create a server so just mock it from list and filter it
-	const jsonArray: any = await loadClientOrganizationList(1000, 0)
-	console.log("Json is loaded: " + jsonArray)
-	return jsonArray.find((organization: ClientOrganization) => organization.id === id)
 }

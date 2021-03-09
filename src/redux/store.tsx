@@ -1,9 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit"
 import {counterSlice} from "redux/CounterSlice"
+import {clientOrganizationSlice} from "redux/ClientOrganizationSlice"
 
 const store = configureStore({
 	reducer: {
-		counter: counterSlice.reducer
+		counter: counterSlice.reducer,
+		clientOrganization: clientOrganizationSlice.reducer
 	}
 })
 
