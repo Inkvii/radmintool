@@ -1,5 +1,5 @@
 import {createMuiTheme} from "@material-ui/core"
-import {blue} from "@material-ui/core/colors"
+import {blue, red} from "@material-ui/core/colors"
 
 const lightTheme = createMuiTheme({
 	palette: {
@@ -8,6 +8,9 @@ const lightTheme = createMuiTheme({
 		},
 		secondary: {
 			main: blue["300"]
+		},
+		error: {
+			main: red["700"]
 		},
 		contrastThreshold: 3,
 		tonalOffset: 0.2

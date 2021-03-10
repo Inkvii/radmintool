@@ -1,11 +1,52 @@
-import {Card, CardContent, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core"
+import {Button, Card, CardActions, CardContent, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core"
 import {ClientOrganization} from "view/pages/clientOrganization/clientOrganizationDetail/interfaces"
+import {useState} from "react"
+import EditableTextField from "components/EditableTextField"
+import axios from "axios"
 
 interface Props {
 	organization: ClientOrganization
 }
 
 export default function BasicInfo({organization}: Props) {
+
+	const [editMode, setEditMode] = useState<boolean>(false)
+	const [changedColumns, setChangedColumns] = useState<Map<string, string>>(new Map())
+
+
+	const captureChangedColumn = (fieldName: string, changedValue: string) => {
+		console.log(`Value of field ${fieldName} has been changed to ${changedValue}`)
+		changedColumns.set(fieldName, changedValue)
+	}
+
+	const saveChanges = () => {
+		setEditMode(false)
+		const id = organization.id
+
+		const payload = Array.from(changedColumns, ([name, value]) => ({name, value}))
+
+		// TODO: somehow last value change in editable textfield isnt triggered. Find out why
+
+		console.log(`Before sending: ${JSON.stringify(payload)}`)
+		if (payload.length < 1) {
+			return
+		}
+
+		axios.post(`http://localhost:8080/clientOrganization/${id}/update`, payload).then(res => {
+				console.log("Update finished " + res.data.toString())
+				setChangedColumns(new Map())
+			}
+		)
+	}
+
+
+	const CreateTableRow = (name: string, value: string | number) => (
+		<TableRow>
+			<TableCell align={"left"} style={{width: "50%"}} variant={"head"}>{name}</TableCell>
+			<TableCell><EditableTextField fieldName={name} value={value.toString()} editMode={editMode} callbackOnChange={captureChangedColumn}/></TableCell>
+		</TableRow>
+	)
+
 
 	return (
 		<Card>
@@ -14,22 +55,22 @@ export default function BasicInfo({organization}: Props) {
 				<TableContainer>
 					<Table>
 						<TableBody>
-							<TableRow>
-								<TableCell>Id</TableCell>
-								<TableCell>{organization.id}</TableCell>
-							</TableRow>
-							<TableRow>
-								<TableCell>Doing business as</TableCell>
-								<TableCell>{organization.doingBusinessAs}</TableCell>
-							</TableRow>
-							<TableRow>
-								<TableCell>External client organization id</TableCell>
-								<TableCell>{organization.externalClientOrganizationId}</TableCell>
-							</TableRow>
+							{CreateTableRow("Id", organization.id)}
+							{CreateTableRow("Doing business as", organization.doingBusinessAs)}
+							{CreateTableRow("External client organization id", organization.externalClientOrganizationId)}
 						</TableBody>
 					</Table>
 				</TableContainer>
 			</CardContent>
+
+			<CardActions>
+				{!editMode &&
+				<Button color={"primary"} variant={"contained"} onClick={() => setEditMode(!editMode)}>Edit client organization</Button>}
+				{editMode &&
+				<Button color={"primary"} variant={"outlined"} onClick={() => saveChanges()}>Save client organization</Button>}
+				<Button variant={"outlined"} color={"primary"} disabled>Delete client organization</Button>
+			</CardActions>
+
 		</Card>
 	)
 }
