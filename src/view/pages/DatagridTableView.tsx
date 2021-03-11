@@ -24,7 +24,7 @@ export default function DatagridTableView() {
 				const res: SimpleTableJsonData = response.data
 				setRawJson(res)
 			}).catch(err => {
-			console.log("Error " + err)
+			console.error("Error " + err)
 		})
 	}, [])
 

@@ -15,7 +15,7 @@ export default function TableRows({numberOfHeaderColumns, rows}: Props) {
 
 
 	const onCellClick = (value: DataTableCell) => {
-		console.log(`Cell clicked ${value.name} ${value.value} ${value.link}`)
+		console.debug(`Cell clicked ${value.name} ${value.value} ${value.link}`)
 
 		if (value.link !== undefined) {
 			history.push(PATH_ROUTES.clientOrganization + "/" + value.link)

@@ -1,6 +1,7 @@
 import {useHistory} from "react-router-dom"
 import {CellParams, ColDef, DataGrid, RowsProp} from "@material-ui/data-grid"
 import {Button} from "@material-ui/core"
+import {useEffect} from "react"
 
 
 export interface TableListComponentHeader {
@@ -24,7 +25,13 @@ export default function TableListComponent(props: Props) {
 		}
 	})
 
-	console.log(props.jsonRows)
+	useEffect(() => {
+		if (props.jsonRows.length > 0) {
+			console.debug(props.jsonRows)
+		}
+
+	}, [props.jsonRows])
+
 
 	const createButtonColumn = (field: string, headerName: string, linkToTarget: string) => {
 		const clickableColumnType: ColDef = {

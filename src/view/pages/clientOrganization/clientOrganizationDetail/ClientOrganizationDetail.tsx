@@ -19,7 +19,7 @@ export default function ClientOrganizationDetail() {
 
 	useEffect(() => {
 		if (currentClientOrganization?.id !== parseInt(id)) {
-			console.log("Dispatching ids")
+			console.debug("Dispatching ids")
 
 			dispatch(fetchClientOrganizationById(id))
 		}

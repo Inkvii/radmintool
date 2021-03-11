@@ -1,12 +1,14 @@
 
 async function loadFile(callback: any, delayRange: number, addedDelay: number) {
 	const timeToWait: number = Math.random() * delayRange + addedDelay
-	console.log("Will wait " + timeToWait)
+	console.group("Will wait " + timeToWait)
+	console.time()
 
 	const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
 	await sleep(timeToWait)
-	console.log("Waiting finished")
+	console.timeEnd()
+	console.groupEnd()
 	return callback
 }
 

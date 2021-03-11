@@ -12,14 +12,15 @@ export default function EditableTextField({...props}: Props) {
 	const [value, setValue] = useState<string>(props.value)
 
 	useEffect(() => {
+		console.debug(`Effect was called. Value set to ${props.value}`)
 		setValue(props.value)
 	}, [props.value])
 
+
 	const registerOnChangeEvent = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-		if (event.target.value) {
-			setValue(event.target.value)
-			props.callbackOnChange(props.fieldName, value)
-		}
+		const eventValue = event.target.value
+		props.callbackOnChange(props.fieldName, eventValue)
+		setValue(eventValue)
 	}
 
 	if (props.editMode)

@@ -15,7 +15,7 @@ export default function BasicInfo({organization}: Props) {
 
 
 	const captureChangedColumn = (fieldName: string, changedValue: string) => {
-		console.log(`Value of field ${fieldName} has been changed to ${changedValue}`)
+		console.debug(`Value of field ${fieldName} has been changed to ${changedValue}`)
 		changedColumns.set(fieldName, changedValue)
 	}
 
@@ -25,15 +25,14 @@ export default function BasicInfo({organization}: Props) {
 
 		const payload = Array.from(changedColumns, ([name, value]) => ({name, value}))
 
-		// TODO: somehow last value change in editable textfield isnt triggered. Find out why
 
-		console.log(`Before sending: ${JSON.stringify(payload)}`)
+		console.debug(`Before sending: ${JSON.stringify(payload)}`)
 		if (payload.length < 1) {
 			return
 		}
 
 		axios.post(`http://localhost:8080/clientOrganization/${id}/update`, payload).then(res => {
-				console.log("Update finished " + res.data.toString())
+				console.debug("Update finished " + res.data.toString())
 				setChangedColumns(new Map())
 			}
 		)

@@ -14,9 +14,9 @@ export default function ClientOrganizationListView() {
 
 		const fetchMyPromise = async () => {
 			const promise: DataTableRow[] = await fetchClientOrganizationListRows()
-			console.log("Promise is retrieved ")
+			console.debug("Promise is retrieved ")
 			if (isSubscribed) {
-				console.log("Component is still mounted, updating rows")
+				console.debug("Component is still mounted, updating rows")
 				setRows(promise)
 			}
 		}
@@ -35,10 +35,10 @@ export default function ClientOrganizationListView() {
 }
 
 async function fetchClientOrganizationListRows(): Promise<DataTableRow[]> {
-	console.log("Starting to fetch rows")
+	console.group("Starting to fetch rows")
 	const jsonArray: any = await loadClientOrganizationList()
 
-	console.log("Json is loaded: " + jsonArray)
+	console.debug("Json is loaded: " + jsonArray)
 
 	let allRows: DataTableRow[] = []
 
@@ -52,7 +52,8 @@ async function fetchClientOrganizationListRows(): Promise<DataTableRow[]> {
 			]
 		}
 		allRows.push(oneRow)
-	});
-	console.log("Json is mapped to rows")
+	})
+	console.info("Json is mapped to rows")
+	console.groupEnd()
 	return allRows
 }
