@@ -5,6 +5,8 @@ import ClientOrganizationDetail from "./view/pages/clientOrganization/clientOrga
 import React from "react"
 import DatagridTableView from "view/pages/DatagridTableView"
 import ReduxCounterExample from "view/pages/ReduxCounterExample"
+import Profile from "view/pages/Profile"
+import Logout from "view/pages/Logout"
 
 export type PathRoute = {
 	uri: string,
@@ -37,6 +39,16 @@ export const PATH_ROUTES = {
 		uri: "/reduxCounter",
 		displayName: "Redux counter",
 		searchable: true
+	},
+	"profile": {
+		uri: "/profile",
+		displayName: "Profile",
+		searchable: false
+	},
+	"logout": {
+		uri: "/logout",
+		displayName: "Logout",
+		searchable: false
 	}
 }
 
@@ -49,6 +61,8 @@ export default function DeclaredRoutes() {
 			<Route path={PATH_ROUTES.clientOrganization.uri + "/:id"} component={ClientOrganizationDetail}/>
 			<Route path={PATH_ROUTES.datagridTableView.uri} component={DatagridTableView}/>
 			<Route path={PATH_ROUTES.reduxCounterExample.uri} component={ReduxCounterExample}/>
+			<Route path={PATH_ROUTES.profile.uri} component={Profile}/>
+			<Route path={PATH_ROUTES.logout.uri} component={Logout}/>
 		</Switch>
 	)
 }

@@ -1,5 +1,5 @@
-import {TableCell, TableHead, TableRow} from "@material-ui/core";
-import React from "react";
+import {TableCell, TableHead, TableRow} from "@material-ui/core"
+import React from "react"
 
 type Props = {
 	headers: string[]

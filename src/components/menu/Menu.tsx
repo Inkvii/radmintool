@@ -3,8 +3,8 @@ import {AppBar, Button, Grid, IconButton, Toolbar} from "@material-ui/core"
 import {Link} from "react-router-dom"
 import {PATH_ROUTES} from "routes"
 import {MenuIcon} from "@material-ui/data-grid"
-import {AccountCircle} from "@material-ui/icons"
 import SearchBar from "components/SearchBar"
+import ProfileButton from "components/menu/ProfileButton"
 
 
 export default function Menu() {
@@ -31,9 +31,7 @@ export default function Menu() {
 						<SearchBar/>
 					</Grid>
 				</Grid>
-				<IconButton edge={"end"} color={"inherit"}>
-					<AccountCircle/>
-				</IconButton>
+				<ProfileButton/>
 			</Toolbar>
 		</AppBar>
 	)

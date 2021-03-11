@@ -3,6 +3,7 @@ import {ClientOrganization} from "view/pages/clientOrganization/clientOrganizati
 import {useState} from "react"
 import EditableTextField from "components/EditableTextField"
 import axios from "axios"
+import CustomSnackbar from "components/CustomSnackbar"
 
 interface Props {
 	organization: ClientOrganization
@@ -12,6 +13,9 @@ export default function BasicInfo({organization}: Props) {
 
 	const [editMode, setEditMode] = useState<boolean>(false)
 	const [changedColumns, setChangedColumns] = useState<Map<string, string>>(new Map())
+	const [openAlertBox, setOpenAlertBox] = useState(false)
+	const [alertBoxMessage, setAlertBoxMessage] = useState<string>("")
+	const [alertBoxSeverity, setAlertBoxSeverity] = useState<'success' | 'info' | 'warning' | 'error'>("success")
 
 
 	const captureChangedColumn = (fieldName: string, changedValue: string) => {
@@ -34,8 +38,16 @@ export default function BasicInfo({organization}: Props) {
 		axios.post(`http://localhost:8080/clientOrganization/${id}/update`, payload).then(res => {
 				console.debug("Update finished " + res.data.toString())
 				setChangedColumns(new Map())
+				setOpenAlertBox(true)
+				setAlertBoxMessage("Updating client organization was successful")
+				setAlertBoxSeverity("success")
 			}
-		)
+		).catch(error => {
+			console.error(error)
+			setOpenAlertBox(true)
+			setAlertBoxMessage("Error was caught during the update")
+			setAlertBoxSeverity("error")
+		})
 	}
 
 
@@ -70,6 +82,8 @@ export default function BasicInfo({organization}: Props) {
 				<Button variant={"outlined"} color={"primary"} disabled>Delete client organization</Button>
 			</CardActions>
 
+			<CustomSnackbar message={alertBoxMessage} shouldOpen={openAlertBox} severity={alertBoxSeverity}
+			                callbackAfterClosingAlert={() => setOpenAlertBox(false)}/>
 		</Card>
 	)
 }

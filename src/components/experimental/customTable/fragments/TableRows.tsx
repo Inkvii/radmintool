@@ -1,6 +1,6 @@
 import {CircularProgress, TableBody, TableCell, TableRow} from "@material-ui/core"
 import React from "react"
-import {DataTableCell, DataTableRow} from "components/DataTable"
+import {DataTableCell, DataTableRow} from "components/experimental/customTable/DataTable"
 import "css.css"
 import {useHistory} from "react-router-dom"
 import {PATH_ROUTES} from "routes"
