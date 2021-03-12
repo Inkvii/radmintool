@@ -5,7 +5,7 @@ import {PATH_ROUTES, PathRouteClass} from "routes"
 import {useHistory} from "react-router-dom"
 
 export default function SearchBar() {
-	const options = Object.values(PATH_ROUTES).filter(value => value.headerInformation.searchable)
+	const options = Object.values(PATH_ROUTES).filter(value => value.linkInfo.searchable)
 	const history = useHistory()
 	const classes = useStyles()
 
@@ -13,7 +13,7 @@ export default function SearchBar() {
 	const [inputValue, setInputValue] = React.useState('')
 
 	const handleRouterLink = (option: PathRouteClass) => {
-		history.push(option.headerInformation.uri)
+		history.push(option.linkInfo.uri)
 	}
 
 	return (
@@ -28,19 +28,19 @@ export default function SearchBar() {
 			}}
 			classes={{listbox: classes.myListbox}}
 			options={options} // list of suggestions in the dropdown list
-			getOptionSelected={(option, value) => option.readerDescription.headerName === value.readerDescription.headerName} //probably equals() method
-			getOptionLabel={(option => option.readerDescription.headerName)} // what will be seen in input box after option is selected
+			getOptionSelected={(option, value) => option.description.headerName === value.description.headerName} //probably equals() method
+			getOptionLabel={(option => option.description.headerName)} // what will be seen in input box after option is selected
 			renderInput={(params) => <TextField {...params} placeholder={"Search"} variant="outlined" size={"small"} fullWidth={true}/>}
 			renderOption={(option) => (
 				<Grid container onClick={() => {
 					handleRouterLink(option)
 				}}>
 					<Grid item xs={8}>
-						<Typography variant={"body1"}>{option.readerDescription.headerName}</Typography>
+						<Typography variant={"body1"}>{option.description.headerName}</Typography>
 					</Grid>
 					<Grid item xs={4}>
 						<Typography variant={"body2"}> This is the very long text that has been here with
-							uri: {option.headerInformation.uri} </Typography>
+							uri: {option.linkInfo.uri} </Typography>
 					</Grid>
 				</Grid>
 			)}

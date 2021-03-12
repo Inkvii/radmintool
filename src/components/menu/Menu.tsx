@@ -11,7 +11,7 @@ export default function Menu() {
 
 	const createButtonLink = (props: PathRouteClass) => {
 		return (
-			<Button color={"inherit"} component={Link} to={props.headerInformation.uri}>{props.readerDescription.headerName}</Button>
+			<Button color={"inherit"} component={Link} to={props.linkInfo.uri}>{props.description.headerName}</Button>
 		)
 	}
 

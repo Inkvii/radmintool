@@ -19,9 +19,9 @@ export default function CustomSearchBar() {
 		getOptionProps,
 		groupedOptions,
 	} = useAutocomplete({
-		options: Object.values(PATH_ROUTES).filter(value => value.headerInformation.searchable), //what will be in the dropdown listbox
-		getOptionLabel: (option) => option.readerDescription.headerName, // what will be seen in input box after option is selected
-		getOptionSelected: (option, value) => option.readerDescription.headerName === value.readerDescription.headerName, //probably equals() method
+		options: Object.values(PATH_ROUTES).filter(value => value.linkInfo.searchable), //what will be in the dropdown listbox
+		getOptionLabel: (option) => option.description.headerName, // what will be seen in input box after option is selected
+		getOptionSelected: (option, value) => option.description.headerName === value.description.headerName, //probably equals() method
 		onOpen: () => {
 			setOpened(true)
 		},
@@ -50,14 +50,14 @@ export default function CustomSearchBar() {
 					<ul className={classes.listbox} style={{width: searchBarWidth}} {...getListboxProps()}>
 						{groupedOptions.map((option, index) => (
 							<li {...getOptionProps({option, index})}>
-								<Link style={{textDecoration: "none", color: "white"}} to={option.headerInformation.uri}>
+								<Link style={{textDecoration: "none", color: "white"}} to={option.linkInfo.uri}>
 									<Grid container style={{padding: 10}}>
 										<Grid item xs={8}>
-											<Typography variant={"body1"}>{option.readerDescription.headerName}</Typography>
+											<Typography variant={"body1"}>{option.description.headerName}</Typography>
 										</Grid>
 										<Grid item xs={4}>
 											<Typography variant={"body2"}> This is the very long text that has been here with
-												uri: {option.headerInformation.uri} </Typography>
+												uri: {option.linkInfo.uri} </Typography>
 										</Grid>
 									</Grid>
 								</Link>

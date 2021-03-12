@@ -31,9 +31,9 @@ export default function ProfileButton() {
 				onClose={handleMenuClick}
 			>
 				<MenuItem
-					onClick={() => handleMenuClick(PATH_ROUTES.profile.headerInformation.uri)}>{PATH_ROUTES.profile.readerDescription.headerName}</MenuItem>
+					onClick={() => handleMenuClick(PATH_ROUTES.profile.linkInfo.uri)}>{PATH_ROUTES.profile.description.headerName}</MenuItem>
 				<MenuItem
-					onClick={() => handleMenuClick(PATH_ROUTES.logout.headerInformation.uri)}>{PATH_ROUTES.logout.readerDescription.headerName}</MenuItem>
+					onClick={() => handleMenuClick(PATH_ROUTES.logout.linkInfo.uri)}>{PATH_ROUTES.logout.description.headerName}</MenuItem>
 			</Menu>
 		</>
 	)

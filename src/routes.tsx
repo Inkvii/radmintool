@@ -10,7 +10,7 @@ import Logout from "view/pages/Logout"
 import Index from "view/pages/Index"
 
 
-export class PathRouteHeaderInformation {
+export class LinkInfo {
 	uri: string
 	searchable: boolean
 
@@ -20,7 +20,7 @@ export class PathRouteHeaderInformation {
 	}
 }
 
-export class PathRouteReaderDescription {
+export class RouteDescription {
 	headerName: string
 	shortDescription: string
 	longDescription: string
@@ -33,14 +33,14 @@ export class PathRouteReaderDescription {
 }
 
 export class PathRouteClass {
-	headerInformation: PathRouteHeaderInformation
-	readerDescription: PathRouteReaderDescription
+	linkInfo: LinkInfo
+	description: RouteDescription
 	component: React.FunctionComponent
 
 
-	constructor(headerInformation: PathRouteHeaderInformation, readerDescription: PathRouteReaderDescription, component: React.FunctionComponent) {
-		this.headerInformation = headerInformation
-		this.readerDescription = readerDescription
+	constructor(linkInfo: LinkInfo, description: RouteDescription, component: React.FunctionComponent) {
+		this.linkInfo = linkInfo
+		this.description = description
 		this.component = component
 	}
 }
@@ -48,43 +48,43 @@ export class PathRouteClass {
 
 export const PATH_ROUTES = {
 	"home": new PathRouteClass(
-		new PathRouteHeaderInformation("/"),
-		new PathRouteReaderDescription("Dashboard", "Page about day to day goings"),
+		new LinkInfo("/"),
+		new RouteDescription("Dashboard", "Page about day to day goings"),
 		Home
 	),
 	"clientOrganizationListView": new PathRouteClass(
-		new PathRouteHeaderInformation("/clientOrganizationListView"),
-		new PathRouteReaderDescription("Custom client organization table list", "Page with table and all available client organizations we do have registered"),
+		new LinkInfo("/clientOrganizationListView"),
+		new RouteDescription("Custom client organization table list", "Page with table and all available client organizations we do have registered"),
 		ClientOrganizationListView
 	),
 	"clientOrganization": new PathRouteClass(
-		new PathRouteHeaderInformation("/clientOrganization", false),
-		new PathRouteReaderDescription("Detail view of one client organization", "Detail view of one selected client organization"),
+		new LinkInfo("/clientOrganization", false),
+		new RouteDescription("Detail view of one client organization", "Detail view of one selected client organization"),
 		ClientOrganizationDetail
 	),
 	"datagridTableView": new PathRouteClass(
-		new PathRouteHeaderInformation("/datagridTableView"),
-		new PathRouteReaderDescription("Component of data grid", "Data grid view of all people we have in our system"),
+		new LinkInfo("/datagridTableView"),
+		new RouteDescription("Component of data grid", "Data grid view of all people we have in our system"),
 		DatagridTableView
 	),
 	"reduxCounterExample": new PathRouteClass(
-		new PathRouteHeaderInformation("/reduxCounter"),
-		new PathRouteReaderDescription("Redux counter", "Redux counter example"),
+		new LinkInfo("/reduxCounter"),
+		new RouteDescription("Redux counter", "Redux counter example"),
 		ReduxCounterExample
 	),
 	"profile": new PathRouteClass(
-		new PathRouteHeaderInformation("/profile", false),
-		new PathRouteReaderDescription("User profile", "Profile settings and overview"),
+		new LinkInfo("/profile", false),
+		new RouteDescription("User profile", "Profile settings and overview"),
 		Profile
 	),
 	"logout": new PathRouteClass(
-		new PathRouteHeaderInformation("/logout", false),
-		new PathRouteReaderDescription("Logout", "Page that leads away from here"),
+		new LinkInfo("/logout", false),
+		new RouteDescription("Logout", "Page that leads away from here"),
 		Logout
 	),
 	"index": new PathRouteClass(
-		new PathRouteHeaderInformation("/index"),
-		new PathRouteReaderDescription("Index of all pages", "Page containing index of all searchable pages"),
+		new LinkInfo("/index"),
+		new RouteDescription("Index of all pages", "Page containing index of all searchable pages"),
 		Index
 	)
 }
@@ -93,14 +93,13 @@ export const PATH_ROUTES = {
 export default function DeclaredRoutes() {
 
 	const createSimpleRoute = (pathRoute: PathRouteClass) => {
-		return (<Route path={pathRoute.headerInformation.uri} component={pathRoute.component}/>)
+		return (<Route path={pathRoute.linkInfo.uri} component={pathRoute.component}/>)
 	}
 
 	return (
 		<Switch>
-			<Route exact path={PATH_ROUTES.home.headerInformation.uri} component={PATH_ROUTES.home.component}/>
-			<Route exact path={PATH_ROUTES.clientOrganization.headerInformation.uri + "/:id"}
-			       component={PATH_ROUTES.clientOrganization.component}/>
+			<Route exact path={PATH_ROUTES.home.linkInfo.uri} component={PATH_ROUTES.home.component}/>
+			<Route exact path={PATH_ROUTES.clientOrganization.linkInfo.uri + "/:id"} component={PATH_ROUTES.clientOrganization.component}/>
 			{createSimpleRoute(PATH_ROUTES.clientOrganizationListView)}
 			{createSimpleRoute(PATH_ROUTES.datagridTableView)}
 			{createSimpleRoute(PATH_ROUTES.reduxCounterExample)}
