@@ -7,6 +7,7 @@ import DatagridTableView from "view/pages/DatagridTableView"
 import ReduxCounterExample from "view/pages/ReduxCounterExample"
 import Profile from "view/pages/Profile"
 import Logout from "view/pages/Logout"
+import Index from "view/pages/Index"
 
 export type PathRoute = {
 	uri: string,
@@ -49,6 +50,11 @@ export const PATH_ROUTES = {
 		uri: "/logout",
 		displayName: "Logout",
 		searchable: false
+	},
+	"index": {
+		uri: "/index",
+		displayName: "Index page",
+		searchable: true
 	}
 }
 
@@ -63,6 +69,7 @@ export default function DeclaredRoutes() {
 			<Route path={PATH_ROUTES.reduxCounterExample.uri} component={ReduxCounterExample}/>
 			<Route path={PATH_ROUTES.profile.uri} component={Profile}/>
 			<Route path={PATH_ROUTES.logout.uri} component={Logout}/>
+			<Route path={PATH_ROUTES.index.uri} component={Index}/>
 		</Switch>
 	)
 }

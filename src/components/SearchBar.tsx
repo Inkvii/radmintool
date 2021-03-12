@@ -9,7 +9,7 @@ export default function SearchBar() {
 	const history = useHistory()
 	const classes = useStyles()
 
-	const [selectedValue, setSelectedValue] = React.useState<PathRoute | null>(options[0])
+	const [selectedValue, setSelectedValue] = React.useState<PathRoute | null>(null)
 	const [inputValue, setInputValue] = React.useState('')
 
 	const handleRouterLink = (option: PathRoute) => {
@@ -30,7 +30,7 @@ export default function SearchBar() {
 			options={options} // list of suggestions in the dropdown list
 			getOptionSelected={(option, value) => option.displayName === value.displayName} //probably equals() method
 			getOptionLabel={(option => option.displayName)} // what will be seen in input box after option is selected
-			renderInput={(params) => <TextField {...params} variant="outlined" size={"small"} fullWidth={true}/>}
+			renderInput={(params) => <TextField {...params} placeholder={"Search"} variant="outlined" size={"small"} fullWidth={true}/>}
 			renderOption={(option) => (
 				<Grid container onClick={() => {
 					handleRouterLink(option)

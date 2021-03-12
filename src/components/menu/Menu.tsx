@@ -24,8 +24,8 @@ export default function Menu() {
 				<Grid container>
 					<Grid item xs={6}>
 						{createButtonLink(PATH_ROUTES.home)}
-						{createButtonLink(PATH_ROUTES.clientOrganizationListView)}
-						{createButtonLink(PATH_ROUTES.datagridTableView)}
+						{createButtonLink(PATH_ROUTES.index)}
+
 					</Grid>
 					<Grid item xs>
 						<SearchBar/>
