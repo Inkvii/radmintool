@@ -28,10 +28,10 @@ export default function SearchBar() {
 			}}
 			classes={{listbox: classes.myListbox}}
 			options={options} // list of suggestions in the dropdown list
-			getOptionSelected={(option, value) => option.description.headerName === value.description.headerName} //probably equals() method
-			getOptionLabel={(option => option.description.headerName)} // what will be seen in input box after option is selected
+			getOptionSelected={(option: PathRouteClass, value: PathRouteClass) => option.description.headerName === value.description.headerName} //probably equals() method
+			getOptionLabel={((option: PathRouteClass) => option.description.headerName)} // what will be seen in input box after option is selected
 			renderInput={(params) => <TextField {...params} placeholder={"Search"} variant="outlined" size={"small"} fullWidth={true}/>}
-			renderOption={(option) => (
+			renderOption={(option: PathRouteClass) => (
 				<Grid container onClick={() => {
 					handleRouterLink(option)
 				}}>
@@ -39,8 +39,7 @@ export default function SearchBar() {
 						<Typography variant={"body1"}>{option.description.headerName}</Typography>
 					</Grid>
 					<Grid item xs={4}>
-						<Typography variant={"body2"}> This is the very long text that has been here with
-							uri: {option.linkInfo.uri} </Typography>
+						<Typography variant={"body2"}> {option.description.shortDescription} </Typography>
 					</Grid>
 				</Grid>
 			)}
