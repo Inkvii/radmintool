@@ -1,7 +1,7 @@
 import React from "react"
 import {AppBar, Button, Grid, IconButton, Toolbar} from "@material-ui/core"
 import {Link} from "react-router-dom"
-import {PATH_ROUTES} from "routes"
+import {PATH_ROUTES, PathRouteClass} from "routes"
 import {MenuIcon} from "@material-ui/data-grid"
 import SearchBar from "components/SearchBar"
 import ProfileButton from "components/menu/ProfileButton"
@@ -9,9 +9,9 @@ import ProfileButton from "components/menu/ProfileButton"
 
 export default function Menu() {
 
-	const createButtonLink = (props: { uri: string, displayName: string }) => {
+	const createButtonLink = (props: PathRouteClass) => {
 		return (
-			<Button color={"inherit"} component={Link} to={props.uri}>{props.displayName}</Button>
+			<Button color={"inherit"} component={Link} to={props.headerInformation.uri}>{props.readerDescription.headerName}</Button>
 		)
 	}
 

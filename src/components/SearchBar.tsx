@@ -1,25 +1,25 @@
 import React from 'react'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import {createStyles, Grid, makeStyles, TextField, Theme, Typography} from "@material-ui/core"
-import {PATH_ROUTES, PathRoute} from "routes"
+import {PATH_ROUTES, PathRouteClass} from "routes"
 import {useHistory} from "react-router-dom"
 
 export default function SearchBar() {
-	const options = Object.values(PATH_ROUTES).filter(value => value.searchable)
+	const options = Object.values(PATH_ROUTES).filter(value => value.headerInformation.searchable)
 	const history = useHistory()
 	const classes = useStyles()
 
-	const [selectedValue, setSelectedValue] = React.useState<PathRoute | null>(null)
+	const [selectedValue, setSelectedValue] = React.useState<PathRouteClass | null>(null)
 	const [inputValue, setInputValue] = React.useState('')
 
-	const handleRouterLink = (option: PathRoute) => {
-		history.push(option.uri)
+	const handleRouterLink = (option: PathRouteClass) => {
+		history.push(option.headerInformation.uri)
 	}
 
 	return (
 		<Autocomplete
 			value={selectedValue}
-			onChange={(event: any, newValue: PathRoute | null) => {
+			onChange={(event: any, newValue: PathRouteClass | null) => {
 				setSelectedValue(newValue)
 			}}
 			inputValue={inputValue}
@@ -28,19 +28,19 @@ export default function SearchBar() {
 			}}
 			classes={{listbox: classes.myListbox}}
 			options={options} // list of suggestions in the dropdown list
-			getOptionSelected={(option, value) => option.displayName === value.displayName} //probably equals() method
-			getOptionLabel={(option => option.displayName)} // what will be seen in input box after option is selected
+			getOptionSelected={(option, value) => option.readerDescription.headerName === value.readerDescription.headerName} //probably equals() method
+			getOptionLabel={(option => option.readerDescription.headerName)} // what will be seen in input box after option is selected
 			renderInput={(params) => <TextField {...params} placeholder={"Search"} variant="outlined" size={"small"} fullWidth={true}/>}
 			renderOption={(option) => (
 				<Grid container onClick={() => {
 					handleRouterLink(option)
 				}}>
 					<Grid item xs={8}>
-						<Typography variant={"body1"}>{option.displayName}</Typography>
+						<Typography variant={"body1"}>{option.readerDescription.headerName}</Typography>
 					</Grid>
 					<Grid item xs={4}>
 						<Typography variant={"body2"}> This is the very long text that has been here with
-							uri: {option.uri} </Typography>
+							uri: {option.headerInformation.uri} </Typography>
 					</Grid>
 				</Grid>
 			)}

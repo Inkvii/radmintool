@@ -18,7 +18,7 @@ export default function TableRows({numberOfHeaderColumns, rows}: Props) {
 		console.debug(`Cell clicked ${value.name} ${value.value} ${value.link}`)
 
 		if (value.link !== undefined) {
-			history.push(PATH_ROUTES.clientOrganization + "/" + value.link)
+			history.push(PATH_ROUTES.clientOrganization.headerInformation.uri + "/" + value.link)
 
 		}
 	}
