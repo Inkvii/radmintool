@@ -7,7 +7,7 @@ import DatagridTableView from "view/pages/DatagridTableView"
 import ReduxCounterExample from "view/pages/ReduxCounterExample"
 import Profile from "view/pages/Profile"
 import Logout from "view/pages/Logout"
-import Index from "view/pages/Index"
+import IndexPage from "view/pages/index/IndexPage"
 
 
 export class LinkInfo {
@@ -85,7 +85,7 @@ export const PATH_ROUTES = {
 	"index": new PathRouteClass(
 		new LinkInfo("/index"),
 		new RouteDescription("Index of all pages", "Page containing index of all searchable pages"),
-		Index
+		IndexPage
 	)
 }
 
