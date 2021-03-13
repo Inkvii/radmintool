@@ -16,7 +16,7 @@ export default function SearchBar() {
 		if (selectedValue) {
 			history.push(selectedValue.linkInfo.uri)
 		}
-	}, [selectedValue])
+	}, [selectedValue, history])
 
 	return (
 		<Autocomplete
