@@ -6,13 +6,12 @@ const headerTheme = createMuiTheme({
 		palette: {
 			primary: {
 				main: red["900"],
-				light: red["700"]
 			},
 			secondary: {
 				main: red[700]
 			},
 			contrastThreshold: 3,
-			tonalOffset: 0.2
+			tonalOffset: 0.1
 		},
 		overrides: {
 			MuiInput: {
@@ -28,7 +27,7 @@ const headerTheme = createMuiTheme({
 			},
 			MuiOutlinedInput: {
 				root: {
-					backgroundColor: red["700"],
+					backgroundColor: red[700],
 				},
 				notchedOutline: {
 					border: "none"

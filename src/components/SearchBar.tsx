@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import {createStyles, Grid, makeStyles, TextField, Theme, Typography} from "@material-ui/core"
 import {PATH_ROUTES, PathRouteClass} from "routes"
@@ -12,9 +12,11 @@ export default function SearchBar() {
 	const [selectedValue, setSelectedValue] = React.useState<PathRouteClass | null>(null)
 	const [inputValue, setInputValue] = React.useState('')
 
-	const handleRouterLink = (option: PathRouteClass) => {
-		history.push(option.linkInfo.uri)
-	}
+	useEffect(() => {
+		if (selectedValue) {
+			history.push(selectedValue.linkInfo.uri)
+		}
+	}, [selectedValue])
 
 	return (
 		<Autocomplete
@@ -26,15 +28,14 @@ export default function SearchBar() {
 			onInputChange={(event, newInputValue) => {
 				setInputValue(newInputValue)
 			}}
-			classes={{listbox: classes.myListbox}}
+			autoHighlight={true}
+			classes={{listbox: classes.myListbox, option: classes.option}}
 			options={options} // list of suggestions in the dropdown list
 			getOptionSelected={(option: PathRouteClass, value: PathRouteClass) => option.description.headerName === value.description.headerName} //probably equals() method
 			getOptionLabel={((option: PathRouteClass) => option.description.headerName)} // what will be seen in input box after option is selected
 			renderInput={(params) => <TextField {...params} placeholder={"Search"} variant="outlined" size={"small"} fullWidth={true}/>}
 			renderOption={(option: PathRouteClass) => (
-				<Grid container onClick={() => {
-					handleRouterLink(option)
-				}}>
+				<Grid container>
 					<Grid item xs={8}>
 						<Typography variant={"body1"}>{option.description.headerName}</Typography>
 					</Grid>
@@ -53,8 +54,20 @@ export default function SearchBar() {
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	myListbox: {
-		backgroundColor: theme.palette.primary.light,
+		backgroundColor: theme.palette.secondary.main,
 		color: "#FFF",
 		borderRadius: 0,
+	},
+	option: {
+		// Hover
+		'&[data-focus="true"]': {
+			backgroundColor: theme.palette.secondary.dark,
+			borderColor: 'transparent',
+		},
+		// Selected
+		'&[aria-selected="true"]': {
+			backgroundColor: theme.palette.primary.light,
+			borderColor: 'transparent',
+		},
 	},
 }))

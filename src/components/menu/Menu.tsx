@@ -22,12 +22,12 @@ export default function Menu() {
 					<MenuIcon/>
 				</IconButton>
 				<Grid container>
-					<Grid item xs={6}>
+					<Grid item xs={12} sm={6}>
 						{createButtonLink(PATH_ROUTES.home)}
 						{createButtonLink(PATH_ROUTES.index)}
 
 					</Grid>
-					<Grid item xs>
+					<Grid item xs={12} sm={6}>
 						<SearchBar/>
 					</Grid>
 				</Grid>
