@@ -5,21 +5,13 @@ import {PATH_ROUTES, PathRouteClass} from "routes"
 import {MenuIcon} from "@material-ui/data-grid"
 import SearchBar from "components/SearchBar"
 import ProfileButton from "components/menu/ProfileButton"
-import {useAppSelector} from "redux/hooks"
 
 
 export default function Menu() {
-	const authenticationToken: string = useAppSelector((state) => state.profile.authenticationToken)
-
 	const createButtonLink = (props: PathRouteClass) => {
 		return (
 			<Button color={"inherit"} component={Link} to={props.linkInfo.uri}>{props.description.headerName}</Button>
 		)
-	}
-
-	if (authenticationToken === "") {
-		// if user is not authenticated, this should probably not be seen
-		return <></>
 	}
 
 	return (
@@ -32,7 +24,6 @@ export default function Menu() {
 					<Grid item xs={12} sm={6}>
 						{createButtonLink(PATH_ROUTES.home)}
 						{createButtonLink(PATH_ROUTES.index)}
-
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<SearchBar/>

@@ -10,6 +10,7 @@ import Logout from "view/pages/Logout"
 import IndexPage from "view/pages/index/IndexPage"
 import LoginPage from "view/pages/LoginPage"
 import {useAppSelector} from "redux/hooks"
+import Header from "view/header/Header"
 
 
 export class LinkInfo {
@@ -118,16 +119,19 @@ export default function DeclaredRoutes() {
 	}
 
 	return (
-		<Switch>
-			<Route exact path={PATH_ROUTES.home.linkInfo.uri} component={PATH_ROUTES.home.component}/>
-			<Route exact path={PATH_ROUTES.clientOrganization.linkInfo.uri + "/:id"} component={PATH_ROUTES.clientOrganization.component}/>
-			{createSimpleRoute(PATH_ROUTES.clientOrganizationListView)}
-			{createSimpleRoute(PATH_ROUTES.datagridTableView)}
-			{createSimpleRoute(PATH_ROUTES.reduxCounterExample)}
-			{createSimpleRoute(PATH_ROUTES.profile)}
-			{createSimpleRoute(PATH_ROUTES.logout)}
-			{createSimpleRoute(PATH_ROUTES.index)}
+		<>
+			<Header/>
+			<Switch>
+				<Route exact path={PATH_ROUTES.home.linkInfo.uri} component={PATH_ROUTES.home.component}/>
+				<Route exact path={PATH_ROUTES.clientOrganization.linkInfo.uri + "/:id"} component={PATH_ROUTES.clientOrganization.component}/>
+				{createSimpleRoute(PATH_ROUTES.clientOrganizationListView)}
+				{createSimpleRoute(PATH_ROUTES.datagridTableView)}
+				{createSimpleRoute(PATH_ROUTES.reduxCounterExample)}
+				{createSimpleRoute(PATH_ROUTES.profile)}
+				{createSimpleRoute(PATH_ROUTES.logout)}
+				{createSimpleRoute(PATH_ROUTES.index)}
 
-		</Switch>
+			</Switch>
+		</>
 	)
 }
