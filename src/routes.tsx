@@ -9,6 +9,7 @@ import Profile from "view/pages/Profile"
 import Logout from "view/pages/Logout"
 import IndexPage from "view/pages/index/IndexPage"
 import LoginPage from "view/pages/LoginPage"
+import {useAppSelector} from "redux/hooks"
 
 
 export class LinkInfo {
@@ -99,18 +100,21 @@ export const PATH_ROUTES = {
 		new RouteDescription("Index of all pages", "Page containing index of all searchable pages"),
 		IndexPage
 	),
-	"login": new PathRouteClass(
-		new LinkInfo("/login", true),
-		new RouteDescription("Login", "Login to the page"),
-		LoginPage
-	)
 }
 
 
 export default function DeclaredRoutes() {
+	const authenticationToken: string = useAppSelector((state) => state.profile.authenticationToken)
 
 	const createSimpleRoute = (pathRoute: PathRouteClass) => {
 		return (<Route path={pathRoute.linkInfo.uri} component={pathRoute.component}/>)
+	}
+
+	if (authenticationToken === "") {
+		console.warn("Authentication token is empty. Showing login page")
+		return <LoginPage/>
+	} else {
+		console.info("Authentication token is set to " + authenticationToken)
 	}
 
 	return (
@@ -122,7 +126,6 @@ export default function DeclaredRoutes() {
 			{createSimpleRoute(PATH_ROUTES.reduxCounterExample)}
 			{createSimpleRoute(PATH_ROUTES.profile)}
 			{createSimpleRoute(PATH_ROUTES.logout)}
-			{createSimpleRoute(PATH_ROUTES.login)}
 			{createSimpleRoute(PATH_ROUTES.index)}
 
 		</Switch>

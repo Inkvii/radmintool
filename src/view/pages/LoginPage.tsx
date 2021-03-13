@@ -1,14 +1,22 @@
-import {Button, Container, createStyles, makeStyles, Paper, TextField, Theme, Typography} from "@material-ui/core"
+import {Button, Container, createStyles, makeStyles, Paper, TextField, Typography} from "@material-ui/core"
+import {useAppDispatch} from "redux/hooks"
+import {saveAuthenticationToken} from "redux/ProfileSlice"
 
 
 export default function LoginPage() {
 	const classes = useStyles()
+	const dispatch = useAppDispatch()
+
+	const handleSubmit = () => {
+		console.info("Mocking login")
+		dispatch(saveAuthenticationToken("Hello"))
+	}
 
 	return (
 		<Container className={classes.login}>
 			<Paper>
 
-				<form className={classes.form} autoComplete={"none"}>
+				<form className={classes.form} autoComplete={"none"} onSubmit={handleSubmit}>
 					<Typography variant={"h4"} align={"center"}>Log in to rAdmin Tool</Typography>
 					<TextField
 						label="Email"
@@ -26,7 +34,7 @@ export default function LoginPage() {
 					/>
 					<div className={classes.buttonGroup}>
 
-						<Button type="button" color="primary" fullWidth className={classes.button}>
+						<Button type="submit" color="primary" fullWidth className={classes.button}>
 							Log in
 						</Button>
 						<Button type="button" color="primary" disabled={true} fullWidth className={classes.button}>
@@ -40,10 +48,9 @@ export default function LoginPage() {
 }
 
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
+const useStyles = makeStyles(() => createStyles({
 
 	login: {
-		// textAlign: "center",
 		maxWidth: "500px",
 		minWidth: "300px",
 		marginTop: "10%"
