@@ -32,16 +32,24 @@ export class RouteDescription {
 	}
 }
 
+export enum RouteGroupEnum {
+	DASHBOARD = "Dashboard",
+	TABLES = "Tables",
+	OTHER = "Other"
+}
+
 export class PathRouteClass {
 	linkInfo: LinkInfo
 	description: RouteDescription
 	component: React.FunctionComponent
+	group: RouteGroupEnum
 
 
-	constructor(linkInfo: LinkInfo, description: RouteDescription, component: React.FunctionComponent) {
+	constructor(linkInfo: LinkInfo, description: RouteDescription, component: React.FunctionComponent, group: RouteGroupEnum = RouteGroupEnum.OTHER) {
 		this.linkInfo = linkInfo
 		this.description = description
 		this.component = component
+		this.group = group
 	}
 }
 
@@ -49,13 +57,15 @@ export class PathRouteClass {
 export const PATH_ROUTES = {
 	"home": new PathRouteClass(
 		new LinkInfo("/"),
-		new RouteDescription("Dashboard", "Page about day to day goings"),
-		Home
+		new RouteDescription("Dashboard", "Page about day to day goings", "Dashboard is considered as one quick overview over day to day happenings, monitoring key performance indicators, seeing all important activity on one place without need for clicking oneself to death and forgetting half of the information gained in the process. No need for excel sheets anymore if good dashboard is available."),
+		Home,
+		RouteGroupEnum.DASHBOARD
 	),
 	"clientOrganizationListView": new PathRouteClass(
 		new LinkInfo("/clientOrganizationListView"),
 		new RouteDescription("Custom client organization table list", "Page with table and all available client organizations we do have registered"),
-		ClientOrganizationListView
+		ClientOrganizationListView,
+		RouteGroupEnum.TABLES
 	),
 	"clientOrganization": new PathRouteClass(
 		new LinkInfo("/clientOrganization", false),
@@ -65,7 +75,8 @@ export const PATH_ROUTES = {
 	"datagridTableView": new PathRouteClass(
 		new LinkInfo("/datagridTableView"),
 		new RouteDescription("Component of data grid", "Data grid view of all people we have in our system"),
-		DatagridTableView
+		DatagridTableView,
+		RouteGroupEnum.TABLES
 	),
 	"reduxCounterExample": new PathRouteClass(
 		new LinkInfo("/reduxCounter"),
