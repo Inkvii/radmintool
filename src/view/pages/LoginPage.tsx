@@ -1,15 +1,16 @@
 import {Button, Container, createStyles, makeStyles, Paper, TextField, Typography} from "@material-ui/core"
 import {useAppDispatch} from "redux/hooks"
-import {saveAuthenticationToken} from "redux/ProfileSlice"
+import {setAuthenticationToken} from "redux/ProfileSlice"
 
 
 export default function LoginPage() {
 	const classes = useStyles()
 	const dispatch = useAppDispatch()
 
+
 	const handleSubmit = () => {
 		console.info("Mocking login")
-		dispatch(saveAuthenticationToken("Hello"))
+		dispatch(setAuthenticationToken("Hello there"))
 	}
 
 	return (
