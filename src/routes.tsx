@@ -8,6 +8,7 @@ import ReduxCounterExample from "view/pages/ReduxCounterExample"
 import Profile from "view/pages/Profile"
 import Logout from "view/pages/Logout"
 import IndexPage from "view/pages/index/IndexPage"
+import LoginPage from "view/pages/LoginPage"
 
 
 export class LinkInfo {
@@ -97,6 +98,11 @@ export const PATH_ROUTES = {
 		new LinkInfo("/index"),
 		new RouteDescription("Index of all pages", "Page containing index of all searchable pages"),
 		IndexPage
+	),
+	"login": new PathRouteClass(
+		new LinkInfo("/login", true),
+		new RouteDescription("Login", "Login to the page"),
+		LoginPage
 	)
 }
 
@@ -116,6 +122,7 @@ export default function DeclaredRoutes() {
 			{createSimpleRoute(PATH_ROUTES.reduxCounterExample)}
 			{createSimpleRoute(PATH_ROUTES.profile)}
 			{createSimpleRoute(PATH_ROUTES.logout)}
+			{createSimpleRoute(PATH_ROUTES.login)}
 			{createSimpleRoute(PATH_ROUTES.index)}
 
 		</Switch>
