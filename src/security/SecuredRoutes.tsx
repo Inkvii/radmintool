@@ -1,20 +1,15 @@
 import DeclaredRoutes from "routes"
 import React, {useEffect, useState} from "react"
 import {useHistory} from "react-router-dom"
-import {loadAuthenticationToken} from "security/authentication"
+import {isTokenValid} from "security/authentication"
 
 export default function SecuredRoutes() {
 	const [shouldAllowUser, setShouldAllowUser] = useState<boolean>(false)
 	const history = useHistory()
 
-	const isTokenValid = (token: string) => {
-		return token !== undefined && token !== null && token !== ""
-	}
 
 	const retrieveAuthenticationLogin = () => {
-		const token = loadAuthenticationToken()
-		console.debug("Token loaded: " + token)
-		const tokenValid = isTokenValid(token)
+		const tokenValid = isTokenValid()
 		console.debug("Is token valid: " + tokenValid)
 		setShouldAllowUser(tokenValid)
 	}

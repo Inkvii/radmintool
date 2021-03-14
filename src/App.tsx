@@ -2,7 +2,8 @@ import './App.css'
 import React from "react"
 import {CssBaseline, MuiThemeProvider} from "@material-ui/core"
 import {BrowserRouter} from "react-router-dom"
-import SecuredRoutes from "theme/LightTheme"
+import lightTheme from "theme/LightTheme"
+import SecuredRoutes from "security/SecuredRoutes"
 
 
 export default function App() {

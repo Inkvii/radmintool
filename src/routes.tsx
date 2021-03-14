@@ -111,16 +111,6 @@ export default function DeclaredRoutes(props: Props) {
 		return (<Route path={pathRoute.linkInfo.uri} component={pathRoute.component}/>)
 	}
 
-
-	// useEffect(() => {
-	// 	console.group("Token check")
-	// 	console.debug("Dispatching token check")
-	// 	dispatch(loadAuthenticationToken())
-	// 	setShouldAllowUser(isTokenValid(token))
-	// 	console.debug("Should allow user? "+isTokenValid(token))
-	// 	console.groupEnd()
-	// }, [token, dispatch])
-
 	if (!props.shouldAllowUser) {
 		console.info("Authentication token is empty. Showing login page")
 		return <LoginPage/>
