@@ -23,13 +23,13 @@ export default function SecuredRoutes() {
 
 	const setIfUserCanViewPage = (location: Location<unknown>, token: AuthenticationToken | null) => {
 		console.group("setIfUserCanViewPage")
-		const route: PathRouteClass | undefined = Object.values(PATH_ROUTES).find(route => route.linkInfo.uri === location.pathname)
+		const route: PathRouteClass | undefined = Object.values(PATH_ROUTES).find(route => location.pathname.includes(route.linkInfo.uri))
 		if (route && token !== null) {
 			console.debug("Route exists and token is valid")
 			let isPermissionFound: boolean
 			if (route.permissions.length > 0) {
 				console.debug("Checking if user is allowed to view page " + location.pathname)
-				isPermissionFound = token.permissions.every((value) => route.permissions.includes(value))
+				isPermissionFound = route.permissions.every((val) => token.permissions.includes(val))
 			} else {
 				console.debug("Page has no permission restrictions")
 				isPermissionFound = true
@@ -56,6 +56,7 @@ export default function SecuredRoutes() {
 		console.info("Trying to access location " + history.location.pathname)
 		accessRightsDecider(history.location)
 		console.groupEnd()
+		// eslint-disable-next-line
 	}, [])
 
 
@@ -69,6 +70,7 @@ export default function SecuredRoutes() {
 			accessRightsDecider(location)
 			console.groupEnd()
 		})
+		// eslint-disable-next-line
 	}, [history])
 
 

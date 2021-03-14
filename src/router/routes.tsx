@@ -8,6 +8,7 @@ import Profile from "view/pages/Profile"
 import Logout from "view/pages/Logout"
 import IndexPage from "view/pages/index/IndexPage"
 import {Permission} from "security/AuthenticationToken"
+import RestrictedPage from "view/pages/RestrictedPage"
 
 
 export class LinkInfo {
@@ -104,6 +105,13 @@ export const PATH_ROUTES = {
 		new RouteDescription("Index of all pages", "Page containing index of all searchable pages"),
 		IndexPage
 	),
+	"restrictedPage": new PathRouteClass(
+		new LinkInfo("/restrictedPage"),
+		new RouteDescription("Restricted page", "Only for admin eyes"),
+		RestrictedPage,
+		RouteGroupEnum.OTHER,
+		[Permission.ADMIN_PAGE]
+	)
 }
 
 

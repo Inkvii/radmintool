@@ -10,6 +10,7 @@ export function loadAuthenticationToken(): AuthenticationToken | null {
 	const token = localStorage.getItem(authenticationTokenName)
 	if (token === undefined || token === null) {
 		console.debug("Token is not set")
+		console.groupEnd()
 		return null
 	}
 	console.debug("Authentication token found in local storage")
