@@ -1,15 +1,13 @@
 import {Button, Container} from "@material-ui/core"
 import {useHistory} from "react-router-dom"
-import {useAppDispatch} from "redux/hooks"
-import {setAuthenticationToken} from "redux/ProfileSlice"
+import {setAuthenticationToken} from "security/authentication"
 
 export default function Logout() {
 	const history = useHistory()
-	const dispatch = useAppDispatch()
 
 	const handleLogout = () => {
 		console.warn("Log out is complete")
-		dispatch(setAuthenticationToken(""))
+		setAuthenticationToken("")
 		history.push("/")
 	}
 

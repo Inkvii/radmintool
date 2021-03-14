@@ -1,23 +1,21 @@
 import {Button, Container, createStyles, makeStyles, Paper, TextField, Typography} from "@material-ui/core"
-import {useAppDispatch} from "redux/hooks"
-import {setAuthenticationToken} from "redux/ProfileSlice"
+import {setAuthenticationToken} from "security/authentication"
 
 
 export default function LoginPage() {
 	const classes = useStyles()
-	const dispatch = useAppDispatch()
 
 
 	const handleSubmit = () => {
 		console.info("Mocking login")
-		dispatch(setAuthenticationToken("Hello there"))
+		setAuthenticationToken("Hello there")
 	}
 
 	return (
 		<Container className={classes.login}>
 			<Paper>
 
-				<form className={classes.form} autoComplete={"none"} onSubmit={handleSubmit}>
+				<form className={classes.form} onSubmit={handleSubmit}>
 					<Typography variant={"h4"} align={"center"}>Log in to rAdmin Tool</Typography>
 					<TextField
 						label="Email"
@@ -25,6 +23,7 @@ export default function LoginPage() {
 						fullWidth
 						type="text"
 						className={classes.textfield}
+						autoComplete={"username"}
 					/>
 					<TextField
 						label="Password"
@@ -32,6 +31,7 @@ export default function LoginPage() {
 						fullWidth
 						type="password"
 						className={classes.textfield}
+						autoComplete={"current-password"}
 					/>
 					<div className={classes.buttonGroup}>
 

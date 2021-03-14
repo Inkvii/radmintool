@@ -2,7 +2,7 @@ import {Route, Switch} from "react-router-dom"
 import Home from "./view/pages/Home"
 import ClientOrganizationListView from "./view/pages/clientOrganization/ClientOrganizationListView"
 import ClientOrganizationDetail from "./view/pages/clientOrganization/clientOrganizationDetail/ClientOrganizationDetail"
-import React, {useEffect, useState} from "react"
+import React from "react"
 import DatagridTableView from "view/pages/DatagridTableView"
 import ReduxCounterExample from "view/pages/ReduxCounterExample"
 import Profile from "view/pages/Profile"
@@ -10,8 +10,6 @@ import Logout from "view/pages/Logout"
 import IndexPage from "view/pages/index/IndexPage"
 import LoginPage from "view/pages/LoginPage"
 import Header from "view/header/Header"
-import {useAppDispatch, useAppSelector} from "redux/hooks"
-import {loadAuthenticationToken} from "redux/ProfileSlice"
 
 
 export class LinkInfo {
@@ -104,33 +102,31 @@ export const PATH_ROUTES = {
 	),
 }
 
+interface Props {
+	shouldAllowUser: boolean
+}
 
-export default function DeclaredRoutes() {
-	const dispatch = useAppDispatch()
-	const token: string = useAppSelector((state) => state.profile.authenticationToken)
-	const [shouldAllowUser, setShouldAllowUser] = useState<boolean>(false)
-
+export default function DeclaredRoutes(props: Props) {
 	const createSimpleRoute = (pathRoute: PathRouteClass) => {
 		return (<Route path={pathRoute.linkInfo.uri} component={pathRoute.component}/>)
 	}
 
-	const isTokenValid = (token: string) => {
-		return token !== undefined && token !== null && token !== ""
-	}
 
-	useEffect(() => {
-		console.debug("Dispatching token check")
-		dispatch(loadAuthenticationToken())
-		setShouldAllowUser(isTokenValid(token))
-	}, [token])
+	// useEffect(() => {
+	// 	console.group("Token check")
+	// 	console.debug("Dispatching token check")
+	// 	dispatch(loadAuthenticationToken())
+	// 	setShouldAllowUser(isTokenValid(token))
+	// 	console.debug("Should allow user? "+isTokenValid(token))
+	// 	console.groupEnd()
+	// }, [token, dispatch])
 
-	if (shouldAllowUser) {
-		console.info("Authentication token is set, loading storage")
-	} else {
-		console.warn("Authentication token is empty. Showing login page")
+	if (!props.shouldAllowUser) {
+		console.info("Authentication token is empty. Showing login page")
 		return <LoginPage/>
+	} else {
+		console.info("Authentication token is set, loading storage")
 	}
-
 
 	return (
 		<>
