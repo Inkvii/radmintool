@@ -37,7 +37,6 @@ export function setAuthenticationToken(token: AuthenticationToken | null) {
 
 /**
  * Returns true if token is valid and verified.
- * todo: will handle access rights as well
  * @param token?
  */
 export function isTokenValid(token?: AuthenticationToken | null) {

@@ -1,7 +1,5 @@
 export enum Permission {
-	DASHBOARD,
 	REDUX_COUNTER,
-	PROFILE,
 	ADMIN_PAGE
 }
 

@@ -93,7 +93,6 @@ export const PATH_ROUTES = {
 		new RouteDescription("User profile", "Profile settings and overview"),
 		Profile,
 		RouteGroupEnum.OTHER,
-		[Permission.PROFILE]
 	),
 	"logout": new PathRouteClass(
 		new LinkInfo("/logout", false),
