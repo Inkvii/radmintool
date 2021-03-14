@@ -2,7 +2,7 @@ import {AccountCircle} from "@material-ui/icons"
 import {IconButton, Menu, MenuItem} from "@material-ui/core"
 import React from "react"
 import {useHistory} from "react-router-dom"
-import {PATH_ROUTES} from "routes"
+import {PATH_ROUTES} from "router/routes"
 
 export default function ProfileButton() {
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)

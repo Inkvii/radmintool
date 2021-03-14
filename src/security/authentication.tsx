@@ -1,14 +1,16 @@
+import {AuthenticationToken} from "security/AuthenticationToken"
+
 const authenticationTokenName = "authenticationToken"
 
 /**
  * Function loads authentication token from local storage and returns it
  */
-export function loadAuthenticationToken() {
+export function loadAuthenticationToken(): AuthenticationToken | null {
 	console.group("loadAuthenticationToken")
 	const token = localStorage.getItem(authenticationTokenName)
 	if (token === undefined || token === null) {
 		console.debug("Token is not set")
-		return ""
+		return null
 	}
 	console.debug("Authentication token found in local storage")
 	const finalToken = JSON.parse(token) || ""
@@ -20,9 +22,9 @@ export function loadAuthenticationToken() {
  * Function sets token to local storage as a json
  * @param token token to be stored
  */
-export function setAuthenticationToken(token: string) {
+export function setAuthenticationToken(token: AuthenticationToken | null) {
 	console.group("setAuthenticationToken")
-	if (token === undefined || token === null || token === "") {
+	if (token === undefined || token === null || token?.token === "") {
 		console.debug("Removing authentication token")
 		localStorage.removeItem(authenticationTokenName)
 	} else {
@@ -35,12 +37,12 @@ export function setAuthenticationToken(token: string) {
 /**
  * Returns true if token is valid and verified.
  * todo: will handle access rights as well
- * @param token
+ * @param token?
  */
-export function isTokenValid(token?: string) {
+export function isTokenValid(token?: AuthenticationToken | null) {
 	if (!token) {
-		token = loadAuthenticationToken()
+		token = loadAuthenticationToken() || undefined
 	}
 
-	return token !== undefined && token !== null && token !== ""
+	return token !== undefined && token !== null && token.token !== ""
 }

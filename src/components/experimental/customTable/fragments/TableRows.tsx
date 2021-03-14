@@ -3,7 +3,7 @@ import React from "react"
 import {DataTableCell, DataTableRow} from "components/experimental/customTable/DataTable"
 import "css.css"
 import {useHistory} from "react-router-dom"
-import {PATH_ROUTES} from "routes"
+import {PATH_ROUTES} from "router/routes"
 
 type Props = {
 	numberOfHeaderColumns: number

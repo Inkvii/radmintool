@@ -1,5 +1,6 @@
 import {Button, Container, createStyles, makeStyles, Paper, TextField, Typography} from "@material-ui/core"
 import {setAuthenticationToken} from "security/authentication"
+import {AuthenticationToken, Permission} from "security/AuthenticationToken"
 
 
 export default function LoginPage() {
@@ -8,7 +9,15 @@ export default function LoginPage() {
 
 	const handleSubmit = () => {
 		console.info("Mocking login")
-		setAuthenticationToken("Hello there")
+		const token: AuthenticationToken = {
+			token: "hello there",
+			permissions: [
+				Permission.REDUX_COUNTER
+			],
+			expires: new Date().getTime() + (8 * 60 * 60 * 1000), //expires in 8 hours
+			issued: new Date().getTime()
+		}
+		setAuthenticationToken(token)
 	}
 
 	return (

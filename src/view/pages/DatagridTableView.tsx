@@ -1,5 +1,5 @@
 import {Container} from "@material-ui/core"
-import {PATH_ROUTES} from "routes"
+import {PATH_ROUTES} from "router/routes"
 import TableListComponent, {TableListComponentHeader} from "components/TableListComponent"
 import {RowsProp} from "@material-ui/data-grid"
 import {useEffect, useState} from "react"

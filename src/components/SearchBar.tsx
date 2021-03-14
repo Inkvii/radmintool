@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import {createStyles, Grid, makeStyles, TextField, Theme, Typography} from "@material-ui/core"
-import {PATH_ROUTES, PathRouteClass} from "routes"
+import PathRouteClass, {PATH_ROUTES} from "router/routes"
 import {useHistory} from "react-router-dom"
 
 export default function SearchBar() {

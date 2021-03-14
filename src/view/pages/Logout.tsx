@@ -7,7 +7,7 @@ export default function Logout() {
 
 	const handleLogout = () => {
 		console.warn("Log out is complete")
-		setAuthenticationToken("")
+		setAuthenticationToken(null)
 		history.push("/")
 	}
 

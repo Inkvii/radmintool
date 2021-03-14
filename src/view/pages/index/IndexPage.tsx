@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core"
 import {Mail} from "@material-ui/icons"
 import {IndexCard} from "view/pages/index/fragments/IndexCard"
-import {PATH_ROUTES, PathRouteClass, RouteGroupEnum} from "routes"
+import PathRouteClass, {PATH_ROUTES, RouteGroupEnum} from "router/routes"
 import {Link} from "react-router-dom"
 import {useEffect, useState} from "react"
 

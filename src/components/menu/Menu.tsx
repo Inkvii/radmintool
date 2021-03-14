@@ -1,7 +1,7 @@
 import React from "react"
 import {AppBar, Button, Grid, IconButton, Toolbar} from "@material-ui/core"
 import {Link} from "react-router-dom"
-import {PATH_ROUTES, PathRouteClass} from "routes"
+import PathRouteClass, {PATH_ROUTES} from "router/routes"
 import {MenuIcon} from "@material-ui/data-grid"
 import SearchBar from "components/SearchBar"
 import ProfileButton from "components/menu/ProfileButton"

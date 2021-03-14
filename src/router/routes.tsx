@@ -1,15 +1,13 @@
-import {Route, Switch} from "react-router-dom"
-import Home from "./view/pages/Home"
-import ClientOrganizationListView from "./view/pages/clientOrganization/ClientOrganizationListView"
-import ClientOrganizationDetail from "./view/pages/clientOrganization/clientOrganizationDetail/ClientOrganizationDetail"
+import Home from "view/pages/Home"
+import ClientOrganizationListView from "view/pages/clientOrganization/ClientOrganizationListView"
+import ClientOrganizationDetail from "view/pages/clientOrganization/clientOrganizationDetail/ClientOrganizationDetail"
 import React from "react"
 import DatagridTableView from "view/pages/DatagridTableView"
 import ReduxCounterExample from "view/pages/ReduxCounterExample"
 import Profile from "view/pages/Profile"
 import Logout from "view/pages/Logout"
 import IndexPage from "view/pages/index/IndexPage"
-import LoginPage from "view/pages/LoginPage"
-import Header from "view/header/Header"
+import {Permission} from "security/AuthenticationToken"
 
 
 export class LinkInfo {
@@ -40,18 +38,20 @@ export enum RouteGroupEnum {
 	OTHER = "Other"
 }
 
-export class PathRouteClass {
+export default class PathRouteClass {
 	linkInfo: LinkInfo
 	description: RouteDescription
 	component: React.FunctionComponent
 	group: RouteGroupEnum
+	permissions: Permission[]
 
 
-	constructor(linkInfo: LinkInfo, description: RouteDescription, component: React.FunctionComponent, group: RouteGroupEnum = RouteGroupEnum.OTHER) {
+	constructor(linkInfo: LinkInfo, description: RouteDescription, component: React.FunctionComponent, group: RouteGroupEnum = RouteGroupEnum.OTHER, permissions: Permission[] = []) {
 		this.linkInfo = linkInfo
 		this.description = description
 		this.component = component
 		this.group = group
+		this.permissions = permissions
 	}
 }
 
@@ -83,12 +83,16 @@ export const PATH_ROUTES = {
 	"reduxCounterExample": new PathRouteClass(
 		new LinkInfo("/reduxCounter"),
 		new RouteDescription("Redux counter", "Redux counter example"),
-		ReduxCounterExample
+		ReduxCounterExample,
+		RouteGroupEnum.OTHER,
+		[Permission.REDUX_COUNTER]
 	),
 	"profile": new PathRouteClass(
 		new LinkInfo("/profile", false),
 		new RouteDescription("User profile", "Profile settings and overview"),
-		Profile
+		Profile,
+		RouteGroupEnum.OTHER,
+		[Permission.PROFILE]
 	),
 	"logout": new PathRouteClass(
 		new LinkInfo("/logout", false),
@@ -102,36 +106,4 @@ export const PATH_ROUTES = {
 	),
 }
 
-interface Props {
-	shouldAllowUser: boolean
-}
 
-export default function DeclaredRoutes(props: Props) {
-	const createSimpleRoute = (pathRoute: PathRouteClass) => {
-		return (<Route path={pathRoute.linkInfo.uri} component={pathRoute.component}/>)
-	}
-
-	if (!props.shouldAllowUser) {
-		console.info("Authentication token is empty. Showing login page")
-		return <LoginPage/>
-	} else {
-		console.info("Authentication token is set, loading storage")
-	}
-
-	return (
-		<>
-			<Header/>
-			<Switch>
-				<Route exact path={PATH_ROUTES.home.linkInfo.uri} component={PATH_ROUTES.home.component}/>
-				<Route exact path={PATH_ROUTES.clientOrganization.linkInfo.uri + "/:id"} component={PATH_ROUTES.clientOrganization.component}/>
-				{createSimpleRoute(PATH_ROUTES.clientOrganizationListView)}
-				{createSimpleRoute(PATH_ROUTES.datagridTableView)}
-				{createSimpleRoute(PATH_ROUTES.reduxCounterExample)}
-				{createSimpleRoute(PATH_ROUTES.profile)}
-				{createSimpleRoute(PATH_ROUTES.logout)}
-				{createSimpleRoute(PATH_ROUTES.index)}
-
-			</Switch>
-		</>
-	)
-}

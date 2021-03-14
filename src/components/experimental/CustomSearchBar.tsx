@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from "react"
 import {useAutocomplete} from "@material-ui/lab"
 import {SearchIcon} from "@material-ui/data-grid"
 import {Link} from "react-router-dom"
-import {PATH_ROUTES} from "routes"
+import {PATH_ROUTES} from "router/routes"
 
 export default function CustomSearchBar() {
 
