@@ -1,4 +1,4 @@
-import Home from "view/pages/Home"
+import Dashboard from "view/pages/dashboard/Dashboard"
 import ClientOrganizationListView from "view/pages/clientOrganization/ClientOrganizationListView"
 import ClientOrganizationDetail from "view/pages/clientOrganization/clientOrganizationDetail/ClientOrganizationDetail"
 import React from "react"
@@ -58,10 +58,10 @@ export default class PathRouteClass {
 
 
 export const PATH_ROUTES = {
-	"home": new PathRouteClass(
+	"dashboard": new PathRouteClass(
 		new LinkInfo("/"),
 		new RouteDescription("Dashboard", "Page about day to day goings", "Dashboard is considered as one quick overview over day to day happenings, monitoring key performance indicators, seeing all important activity on one place without need for clicking oneself to death and forgetting half of the information gained in the process. No need for excel sheets anymore if good dashboard is available."),
-		Home,
+		Dashboard,
 		RouteGroupEnum.DASHBOARD
 	),
 	"clientOrganizationListView": new PathRouteClass(

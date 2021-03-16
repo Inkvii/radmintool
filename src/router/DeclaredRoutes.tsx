@@ -32,7 +32,7 @@ export default function DeclaredRoutes(props: Props) {
 		<>
 			<Header/>
 			<Switch>
-				<Route exact path={PATH_ROUTES.home.linkInfo.uri} component={PATH_ROUTES.home.component}/>
+				<Route exact path={PATH_ROUTES.dashboard.linkInfo.uri} component={PATH_ROUTES.dashboard.component}/>
 				<Route exact path={PATH_ROUTES.clientOrganization.linkInfo.uri + "/:id"} component={PATH_ROUTES.clientOrganization.component}/>
 				{createSimpleRoute(PATH_ROUTES.clientOrganizationListView)}
 				{createSimpleRoute(PATH_ROUTES.datagridTableView)}

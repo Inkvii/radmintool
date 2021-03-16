@@ -22,7 +22,7 @@ export default function Menu() {
 				</IconButton>
 				<Grid container>
 					<Grid item xs={12} sm={6}>
-						{createButtonLink(PATH_ROUTES.home)}
+						{createButtonLink(PATH_ROUTES.dashboard)}
 						{createButtonLink(PATH_ROUTES.index)}
 					</Grid>
 					<Grid item xs={12} sm={6}>
