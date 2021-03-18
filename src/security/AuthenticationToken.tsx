@@ -32,9 +32,15 @@ export default class AuthenticationProvider {
 	 * @private
 	 */
 	private static checkTokenValidity(token: AuthenticationToken | null): boolean {
+		if (token?.expires) {
+			console.log("Token will expire in: " + (token.expires - Date.now() / 1000) + " s")
+		}
+
 		return token !== undefined
 			&& token !== null
+			&& token.expires !== undefined
 			&& token.expires > Date.now()
+			&& token.issued !== undefined
 			&& token.issued < Date.now()
 	}
 
@@ -57,6 +63,7 @@ export default class AuthenticationProvider {
 		console.debug("Token is active: " + this.isActive)
 		console.debug("Token is set: " + this.authenticationToken?.token)
 		console.debug("Token is valid: " + AuthenticationProvider.checkTokenValidity(this.authenticationToken))
+		console.debug("Token expires on " + this.authenticationToken?.expires)
 		console.groupEnd()
 
 		if (!this.isActive) {
@@ -66,6 +73,7 @@ export default class AuthenticationProvider {
 		console.group("Get authentication token")
 		console.time()
 		if (AuthenticationProvider.checkTokenValidity(this.authenticationToken)) {
+			console.debug("Current token in memory is still valid")
 			console.timeEnd()
 			console.groupEnd()
 			return this.authenticationToken
@@ -80,22 +88,21 @@ export default class AuthenticationProvider {
 			return this.authenticationToken
 		}
 
-		const tokenFromBackend: AuthenticationToken | null = await this.requestTokenRenewal()
-		if (AuthenticationProvider.checkTokenValidity(tokenFromBackend)) {
-			this.authenticationToken = tokenFromBackend
-			localStorage.setItem(this.authenticationTokenName, JSON.stringify(tokenFromBackend))
-			console.debug("Token was renewed from backend")
-			console.timeEnd()
-			console.groupEnd()
-			return this.authenticationToken
-		}
+		const token = await this.requestTokenRenewal()
+		return await this.checkBackendRenewedToken(token)
 
-		// setting null in case no fallback is valid
-		this.authenticationToken = null
-		console.debug("Token is set to null")
-		console.timeEnd()
-		console.groupEnd()
-		return this.authenticationToken
+	}
+
+	public async requestTokenRenewal(): Promise<AuthenticationToken | null> {
+		if (this.authenticationToken == null) {
+			return null
+		}
+		localStorage.removeItem(this.authenticationTokenName)
+		console.debug("Requesting token renewal with data " + JSON.stringify(this.authenticationToken))
+		return axios.post("http://localhost:8080/authentication/renewToken", JSON.stringify(this.authenticationToken), {headers: {"Content-Type": "application/json"}}).then(response => {
+			console.debug("Returning response of renewal " + response.data)
+			return response.data as AuthenticationToken
+		})
 	}
 
 	public async requestNewTokenFromBackend(authentication: { username: string, password: string }) {
@@ -113,12 +120,17 @@ export default class AuthenticationProvider {
 			})
 	}
 
-	public async requestTokenRenewal(): Promise<AuthenticationToken | null> {
-		if (this.authenticationToken == null) {
-			return null
+	private async checkBackendRenewedToken(token: AuthenticationToken | null): Promise<AuthenticationToken | null> {
+		if (AuthenticationProvider.checkTokenValidity(token)) {
+			this.authenticationToken = token
+			localStorage.setItem(this.authenticationTokenName, JSON.stringify(token))
+			console.debug("Token was renewed from backend")
+			console.timeEnd()
+			console.groupEnd()
+			return token
 		}
-		console.debug("Requesting token renewal with data " + JSON.stringify(this.authenticationToken))
-		return await axios.post("http://localhost:8080/authentication/renewToken", JSON.stringify(this.authenticationToken)) as AuthenticationToken | null
+		this.authenticationToken = null
+		return null
 	}
 
 	/**
