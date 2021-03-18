@@ -1,10 +1,14 @@
-import {Box, Button, Container, createStyles, makeStyles, Paper, TextField, Typography} from "@material-ui/core"
-import {setAuthenticationToken} from "security/authentication"
-import {AuthenticationToken, Permission} from "security/AuthenticationToken"
+import {Button, Container, createStyles, makeStyles, Paper, TextField, Typography} from "@material-ui/core"
+import {authenticationProvider} from "security/authentication"
 import {useHistory} from "react-router-dom"
+import {useState} from "react"
 
 
 export default function LoginPage() {
+
+	const [username, setUsername] = useState<string>("admin")
+	const [password, setPassword] = useState<string>("password")
+
 	const classes = useStyles()
 	const history = useHistory()
 
@@ -14,42 +18,16 @@ export default function LoginPage() {
 	 */
 	const refreshPage = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
-		console.debug("Refreshing page")
-		history.push(history.location)
-	}
 
-	/**
-	 * Handles setting token based on user input
-	 * @param useAdmin true = uses admin which has all permissions
-	 */
-	const handleSubmit = (useAdmin: boolean = false) => {
-		console.info("Mocking login")
-		let token: AuthenticationToken
-		if (useAdmin) {
-			token = mockAdminRole()
-		} else {
-			token = mockRegularUserRole()
-		}
-		setAuthenticationToken(token)
-	}
+		authenticationProvider.requestNewTokenFromBackend({username, password})
+			.then(() => {
+				console.debug("Refreshing page")
+				history.push(history.location)
+			}).catch(error => {
+			console.error("Could not login " + error)
+		})
 
-	const mockAdminRole = (): AuthenticationToken => {
-		return {
-			token: "Big bad admin",
-			permissions: Object.keys(Permission).map(key => Permission[key as any]).map(value => value as unknown as Permission),
-			expires: new Date().getTime() + (8 * 60 * 60 * 1000), //expires in 8 hours
-			issued: new Date().getTime()
-		}
-	}
-	const mockRegularUserRole = (): AuthenticationToken => {
-		return {
-			token: "hello there",
-			permissions: [
-				Permission.REDUX_COUNTER
-			],
-			expires: new Date().getTime() + (8 * 60 * 60 * 1000), //expires in 8 hours
-			issued: new Date().getTime()
-		}
+
 	}
 
 	return (
@@ -65,6 +43,8 @@ export default function LoginPage() {
 						type="text"
 						className={classes.textfield}
 						autoComplete={"username"}
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
 					/>
 					<TextField
 						label="Password"
@@ -73,6 +53,8 @@ export default function LoginPage() {
 						type="password"
 						className={classes.textfield}
 						autoComplete={"current-password"}
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
 					/>
 					<div className={classes.buttonGroup}>
 
@@ -83,13 +65,6 @@ export default function LoginPage() {
 							Register
 						</Button>
 					</div>
-				</form>
-				<form onSubmit={(event) => refreshPage(event)}>
-
-					<Box display={"flex"} flexDirection={"column"} style={{padding: 10}}>
-						<Button type={"submit"} variant={"contained"} onClick={(() => handleSubmit(true))}>Use admin role</Button>
-						<Button type={"submit"} variant={"outlined"} color={"secondary"} onClick={(() => handleSubmit(false))}>Use regular role</Button>
-					</Box>
 				</form>
 			</Paper>
 		</Container>

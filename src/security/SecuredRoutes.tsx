@@ -1,25 +1,16 @@
 import React, {useEffect, useState} from "react"
 import {useHistory} from "react-router-dom"
-import {isTokenValid, loadAuthenticationToken} from "security/authentication"
 import DeclaredRoutes from "router/DeclaredRoutes"
 import {Location} from "history"
 import PathRouteClass, {PATH_ROUTES} from "router/routes"
 import {AuthenticationToken} from "security/AuthenticationToken"
+import {authenticationProvider} from "security/authentication"
 
 
 export default function SecuredRoutes() {
 	const [tokenIsValid, setTokenIsValid] = useState<boolean>(false)
 	const [userHasPermissionToViewPage, setUserHasPermissionToViewPage] = useState<boolean>(true)
 	const history = useHistory()
-
-
-	const checkAndRetrieveAuthenticationLogin = (): AuthenticationToken | null => {
-		const token = loadAuthenticationToken()
-		const tokenValid = isTokenValid(token)
-		console.debug("Is token valid: " + tokenValid)
-		setTokenIsValid(tokenValid)
-		return token
-	}
 
 	const setIfUserCanViewPage = (location: Location<unknown>, token: AuthenticationToken | null) => {
 		console.group("setIfUserCanViewPage")
@@ -44,8 +35,12 @@ export default function SecuredRoutes() {
 	}
 
 	const accessRightsDecider = (location: Location) => {
-		const token = checkAndRetrieveAuthenticationLogin()
-		setIfUserCanViewPage(location, token)
+		authenticationProvider.getAuthenticationToken().then(token => {
+			console.debug("Is token valid: " + token !== null)
+			setTokenIsValid(token !== null)
+			setIfUserCanViewPage(location, token)
+		})
+
 	}
 
 	/**
