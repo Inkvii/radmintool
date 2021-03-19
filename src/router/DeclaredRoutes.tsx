@@ -34,6 +34,7 @@ export default function DeclaredRoutes(props: Props) {
 			<Switch>
 				<Route exact path={PATH_ROUTES.dashboard.linkInfo.uri} component={PATH_ROUTES.dashboard.component}/>
 				<Route exact path={PATH_ROUTES.clientOrganization.linkInfo.uri + "/:id"} component={PATH_ROUTES.clientOrganization.component}/>
+				<Route exact path={PATH_ROUTES.person.linkInfo.uri + "/:id"} component={PATH_ROUTES.person.component}/>
 				{createSimpleRoute(PATH_ROUTES.clientOrganizationListView)}
 				{createSimpleRoute(PATH_ROUTES.datagridTableView)}
 				{createSimpleRoute(PATH_ROUTES.reduxCounterExample)}
@@ -41,6 +42,7 @@ export default function DeclaredRoutes(props: Props) {
 				{createSimpleRoute(PATH_ROUTES.logout)}
 				{createSimpleRoute(PATH_ROUTES.index)}
 				{createSimpleRoute(PATH_ROUTES.restrictedPage)}
+
 
 			</Switch>
 		</>

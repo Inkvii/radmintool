@@ -9,6 +9,7 @@ import Logout from "view/pages/Logout"
 import IndexPage from "view/pages/index/IndexPage"
 import {Permission} from "security/AuthenticationToken"
 import RestrictedPage from "view/pages/RestrictedPage"
+import PersonDetail from "view/pages/person/PersonDetail"
 
 
 export class LinkInfo {
@@ -110,6 +111,11 @@ export const PATH_ROUTES = {
 		RestrictedPage,
 		RouteGroupEnum.OTHER,
 		[Permission.ADMIN_PAGE]
+	),
+	"person": new PathRouteClass(
+		new LinkInfo("/person", false),
+		new RouteDescription("Person detail", "Detail of one person", "Page contains information about person and their transaction history"),
+		PersonDetail,
 	)
 }
 

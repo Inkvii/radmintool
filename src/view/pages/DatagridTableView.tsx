@@ -29,9 +29,14 @@ export default function DatagridTableView() {
 	}, [])
 
 	const jsonHeaders: TableListComponentHeader[] = rawJson.headers.map(singleHeader => {
-		if (["id", "clientOrganizationReferenceId"].includes(singleHeader.id)) {
-			return {...singleHeader, linkPath: PATH_ROUTES.clientOrganization.linkInfo.uri}
-		} else return singleHeader
+		switch (singleHeader.id) {
+			case "clientOrganizationReferenceId":
+				return {...singleHeader, linkPath: PATH_ROUTES.clientOrganization.linkInfo.uri}
+			case "id":
+				return {...singleHeader, linkPath: PATH_ROUTES.person.linkInfo.uri}
+			default:
+				return singleHeader
+		}
 	})
 
 
