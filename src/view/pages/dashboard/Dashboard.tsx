@@ -5,6 +5,7 @@ import DashboardNewCustomers from "view/pages/dashboard/fragments/DashboardNewCu
 import DashboardMoneyCounter from "view/pages/dashboard/fragments/DashboardMoneyCounter"
 import SockJS from "sockjs-client"
 import Stomp from "stompjs"
+import {useAppSelector} from "redux/hooks"
 
 
 /**
@@ -17,12 +18,12 @@ export default function Dashboard() {
 	// Stomp client handles communication via SockJS
 	const [stompClient, setStompClient] = useState<Stomp.Client | undefined>()
 	const [websocketConnected, setWebsocketConnected] = useState<boolean>(stompClient?.connected ?? false)
+	const isLoggedIn: boolean = useAppSelector((state) => state.profile.isLoggedIn)
 
 	// Connecting to stomp client requires handling in componentDidUpdate otherwise warning is issued
 	useEffect(() => {
-		let isSubscribed = true
 
-		if (isSubscribed) {
+		if (isLoggedIn) {
 			let sock = new SockJS("http://localhost:8080/radmintoolWebsocket")
 
 			sock.onopen = () => {
@@ -51,10 +52,8 @@ export default function Dashboard() {
 
 		// To prevent unclosed sessions, when user moves to different page, the connection is closed
 		return function cleanup() {
-			isSubscribed = false
 			console.debug("Cleanup websocket connection")
 			if (stompClient) {
-				debugger
 				stompClient.disconnect(() => {
 					console.debug("Websocket disconnected")
 				})

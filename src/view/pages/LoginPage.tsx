@@ -2,12 +2,15 @@ import {Button, Container, createStyles, makeStyles, Paper, TextField, Typograph
 import {authenticationProvider} from "security/authentication"
 import {useHistory} from "react-router-dom"
 import {useState} from "react"
+import {useAppDispatch} from "redux/hooks"
+import {setLoggedIn} from "redux/ProfileSlice"
 
 
 export default function LoginPage() {
 
 	const [username, setUsername] = useState<string>("admin")
 	const [password, setPassword] = useState<string>("password")
+	const dispatch = useAppDispatch()
 
 	const classes = useStyles()
 	const history = useHistory()
@@ -23,12 +26,11 @@ export default function LoginPage() {
 		authenticationProvider.requestNewTokenFromBackend({username, password})
 			.then(() => {
 				console.debug("Refreshing page")
+				dispatch(setLoggedIn(true))
 				history.push(history.location)
 			}).catch(error => {
 			console.error("Could not login " + error)
 		})
-
-
 	}
 
 	return (

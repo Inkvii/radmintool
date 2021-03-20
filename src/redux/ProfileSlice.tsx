@@ -7,9 +7,11 @@ export const profileSlice = createSlice({
 		isLoggedIn: false
 	},
 	reducers: {
-
+		setLoggedIn: (state, action) => {
+			state.isLoggedIn = action.payload
+		}
 	}
 })
 
-// export const {} = profileSlice.actions // make actions visible from outside
+export const {setLoggedIn} = profileSlice.actions // make actions visible from outside
 
