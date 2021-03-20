@@ -1,20 +1,11 @@
 // this enum must match backend
 import axios from "axios"
+import {AuthenticationToken} from "BackendObjects"
 
 export enum Permission {
 	REDUX_COUNTER,
 	ADMIN_PAGE
 }
-
-// this interface must match backend
-export interface AuthenticationToken {
-	token: string,
-	issued: number,
-	expires: number,
-	permissions: Permission[]
-}
-
-export type RequestTokenCallback = () => Promise<AuthenticationToken | null>
 
 export default class AuthenticationProvider {
 	public authenticationTokenName: string = "authenticationToken"

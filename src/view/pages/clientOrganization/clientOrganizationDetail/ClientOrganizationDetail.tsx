@@ -4,8 +4,8 @@ import React, {useEffect} from "react"
 import BasicInfo from "view/pages/clientOrganization/clientOrganizationDetail/fragments/BasicInfo"
 import PartyProperties from "view/pages/clientOrganization/clientOrganizationDetail/fragments/PartyProperties"
 import {useAppDispatch, useAppSelector} from "redux/hooks"
-import {ClientOrganization} from "view/pages/clientOrganization/clientOrganizationDetail/interfaces"
 import {fetchClientOrganizationById} from "redux/ClientOrganizationSlice"
+import {ClientOrganization} from "BackendObjects"
 
 interface ParamTypes {
 	id: string

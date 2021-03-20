@@ -1,6 +1,6 @@
 import {Box, Card, CardContent, Grid, Tab, Tabs, TextField} from "@material-ui/core"
 import React from "react"
-import {PartyProperty} from "view/pages/clientOrganization/clientOrganizationDetail/interfaces"
+import {PartyProperty} from "BackendObjects"
 
 interface Props {
 	partyProperties: PartyProperty[]

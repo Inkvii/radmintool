@@ -1,9 +1,9 @@
 import {Button, Card, CardActions, CardContent, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core"
-import {ClientOrganization} from "view/pages/clientOrganization/clientOrganizationDetail/interfaces"
 import {useState} from "react"
 import EditableTextField from "components/EditableTextField"
 import axios from "axios"
 import CustomSnackbar from "components/CustomSnackbar"
+import {ClientOrganization} from "BackendObjects"
 
 interface Props {
 	organization: ClientOrganization

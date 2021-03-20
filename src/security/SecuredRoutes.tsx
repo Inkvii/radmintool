@@ -3,8 +3,8 @@ import {useHistory} from "react-router-dom"
 import DeclaredRoutes from "router/DeclaredRoutes"
 import {Location} from "history"
 import PathRouteClass, {PATH_ROUTES} from "router/routes"
-import {AuthenticationToken} from "security/AuthenticationToken"
 import {authenticationProvider} from "security/authentication"
+import {AuthenticationToken} from "BackendObjects"
 
 
 export default function SecuredRoutes() {

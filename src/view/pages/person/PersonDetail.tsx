@@ -4,27 +4,12 @@ import {useEffect} from "react"
 import {fetchPersonById} from "redux/PersonSlice"
 import {Button, Card, CardContent, Container, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core"
 import {PATH_ROUTES} from "router/routes"
+import {Person} from "BackendObjects"
+import PersonTransactionsTable from "view/pages/person/fragments/PersonTransactionsTable"
 
 interface ParamTypes {
 	id: string
 }
-
-export interface Transaction {
-	"id": number,
-	"createdDatetime": string,
-	"amount": number,
-	"paidBy": Person
-}
-
-export interface Person {
-	"id": number,
-	"firstName": string,
-	"lastName": string,
-	"age": number,
-	"clientOrganizationReference": number,
-	"transactionHistory": Transaction[]
-}
-
 
 export default function PersonDetail() {
 	const {id} = useParams<ParamTypes>()
@@ -54,7 +39,7 @@ export default function PersonDetail() {
 	)
 
 	return (
-		<Container>
+		<Container style={{marginTop: 20}}>
 			<Card>
 				<CardContent>
 					<h2>Basic information about person {currentPerson.id}</h2>
@@ -71,6 +56,8 @@ export default function PersonDetail() {
 					</TableContainer>
 				</CardContent>
 			</Card>
+
+			<PersonTransactionsTable transactions={currentPerson.transactionHistory}/>
 		</Container>
 	)
 }

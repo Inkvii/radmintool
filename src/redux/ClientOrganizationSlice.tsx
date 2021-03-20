@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 import axios from "axios"
+import {ClientOrganization} from "BackendObjects"
 
 export const fetchClientOrganizationById = createAsyncThunk(
 	"clientOrganization/fetchClientOrganizationById",
@@ -9,12 +10,20 @@ export const fetchClientOrganizationById = createAsyncThunk(
 	}
 )
 
+
+const defaultClientOrganization: ClientOrganization = {
+	id: 0,
+	doingBusinessAs: "",
+	externalClientOrganizationId: "",
+	partyProperties: []
+}
+
 export const clientOrganizationSlice = createSlice({
 	name: "clientOrganization",
 	// usually initial state would be in store but using redux toolkit allows it to be defined here
 	initialState: {
 
-		currentClientOrganization: {id: 0, doingBusinessAs: "", externalClientOrganizationId: "", partyProperties: []}
+		currentClientOrganization: defaultClientOrganization
 	},
 	reducers: {},
 	extraReducers: (builder) => {

@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 import axios from "axios"
-import {Person} from "view/pages/person/PersonDetail"
+import {Person} from "BackendObjects"
 
 export const fetchPersonById = createAsyncThunk(
 	"person/fetchPersonById",
