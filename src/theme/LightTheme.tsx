@@ -31,7 +31,9 @@ declare module "@material-ui/core/styles/createPalette" {
 	}
 }
 
-
+/**
+ * Example of extended theme
+ */
 const commonTheme = createMuiTheme({
 	palette: {
 		primary: {
@@ -54,7 +56,14 @@ const commonTheme = createMuiTheme({
 	},
 })
 
-
+/**
+ * Example of editing InputProps of the Material UI components. In this case we want every button to be "contained" with primary color
+ * as default.
+ * The following two buttons will be equal if light theme is used:
+ *    <Button variant="contained" color="primary">my button</Button>
+ *    <Button>my button</Button>
+ *
+ */
 const lightTheme = createMuiTheme({
 	props: {
 		MuiButton: {

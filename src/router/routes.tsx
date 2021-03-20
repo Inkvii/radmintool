@@ -11,7 +11,9 @@ import {Permission} from "security/AuthenticationToken"
 import RestrictedPage from "view/pages/RestrictedPage"
 import PersonDetail from "view/pages/person/PersonDetail"
 
-
+/**
+ * Class containing information about URI and if it shows in other components
+ */
 export class LinkInfo {
 	uri: string
 	searchable: boolean
@@ -22,6 +24,9 @@ export class LinkInfo {
 	}
 }
 
+/**
+ * Class describes the route in greater detail. For purposes of routing, this is irrelevant
+ */
 export class RouteDescription {
 	headerName: string
 	shortDescription: string
@@ -40,6 +45,9 @@ export enum RouteGroupEnum {
 	OTHER = "Other"
 }
 
+/**
+ * Class composed of other URI info, description, what component is being rendered, filtering and permissions needed to view the page
+ */
 export default class PathRouteClass {
 	linkInfo: LinkInfo
 	description: RouteDescription
@@ -57,7 +65,11 @@ export default class PathRouteClass {
 	}
 }
 
-
+/**
+ * Constant declaring all paths that are available in this project.
+ * NOTE: if path is added here, it must be added to DeclaredRoutes as well, otherwise it might be declared but isnt registered
+ * (that is - empty page would show up)
+ */
 export const PATH_ROUTES = {
 	"dashboard": new PathRouteClass(
 		new LinkInfo("/"),

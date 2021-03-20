@@ -15,6 +15,14 @@ interface Props {
 	jsonRows: RowsProp[],
 }
 
+/**
+ * Component for mapping rows and headers to the DataGrid table. When header (see TableListComponentHeader) contains linkPath, it will change
+ * that particular column to buttons with onClick method that changes url to linkPath's value
+ *
+ * This component was created to demonstrate showing custom cell renderer
+ * @param props
+ * @constructor
+ */
 export default function TableListComponent(props: Props) {
 	const history = useHistory()
 

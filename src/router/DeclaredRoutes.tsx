@@ -10,18 +10,35 @@ interface Props {
 	userHasPermissionToViewPage: boolean
 }
 
+/**
+ * Component containing all available paths. If path is not in the routes, user wont be able to get there.
+ * By the definition of react-router-dom Switch - it returns first path that matches the URI.
+ * @param props
+ * @constructor
+ */
 export default function DeclaredRoutes(props: Props) {
-
+	/**
+	 * Helper method for creating route
+	 * @param pathRoute
+	 */
 	const createSimpleRoute = (pathRoute: PathRouteClass) => {
 		return (<Route path={pathRoute.linkInfo.uri} component={pathRoute.component}/>)
 	}
 
+	/**
+	 * Security method that prevents user from accessing pages if they have no/invalid token.
+	 * If triggered, will show login page (but wont redirect user)
+	 */
 	if (!props.tokenIsValid) {
 		console.info("Authentication token is empty. Showing login page")
 		return <LoginPage/>
 	}
 	console.info("Authentication token is set, loading storage")
 
+	/**
+	 * Security method that prevents user from accessing pages they dont have permission to view.
+	 * Permissions for viewing page are declared in PATH_ROUTES and must match permissions that are on the token
+	 */
 	if (!props.userHasPermissionToViewPage) {
 		return <UnauthorizedPage/>
 	}

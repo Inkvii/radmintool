@@ -6,7 +6,10 @@ import {MenuIcon} from "@material-ui/data-grid"
 import SearchBar from "components/SearchBar"
 import ProfileButton from "components/menu/ProfileButton"
 
-
+/**
+ * Top component for menu. Contains appbar, few butons and search bar component.
+ * @constructor
+ */
 export default function Menu() {
 	const createButtonLink = (props: PathRouteClass) => {
 		return (

@@ -1,4 +1,9 @@
-
+/**
+ * Method loads file (as a require("path/to/file")) with random delay as a simulation of backend processing
+ * @param callback requires("path/to/file")
+ * @param delayRange random delay range
+ * @param addedDelay delay added to the random delay
+ */
 async function loadFile(callback: any, delayRange: number, addedDelay: number) {
 	const timeToWait: number = Math.random() * delayRange + addedDelay
 	console.group("Will wait " + timeToWait)
@@ -16,11 +21,7 @@ async function loadClientOrganizationList(delayRange: number = 1000, addedDelay:
 	return loadFile(require("./clientOrgList.json"), delayRange, addedDelay)
 }
 
-async function loadPartyProperties(delayRange: number = 1000, addedDelay: number = 1000) {
-	return loadFile(require("./partyProperties.json"), delayRange, addedDelay)
-}
 
 export {
-	loadPartyProperties,
 	loadClientOrganizationList
 }

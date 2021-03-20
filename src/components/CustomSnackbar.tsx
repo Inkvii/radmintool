@@ -10,6 +10,12 @@ interface Props {
 	autoHideDuration?: number
 }
 
+/**
+ * When user edits client organization this component is triggered. It is basically a notification that appears in bottom middle part
+ * of window, informing user that something happened
+ * @param props
+ * @constructor
+ */
 export default function CustomSnackbar(props: Props) {
 
 	const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {

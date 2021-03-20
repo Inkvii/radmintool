@@ -13,10 +13,11 @@ export default function LoginPage() {
 	const history = useHistory()
 
 	/**
-	 * This is workaround for triggering history change after token is loaded since we dont have listener on local storage
+	 * This is workaround for triggering history change after token is loaded since listener on local storage is triggered
+	 * only from different window
 	 * @param event event to be ignored
 	 */
-	const refreshPage = (event: React.FormEvent<HTMLFormElement>) => {
+	const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 
 		authenticationProvider.requestNewTokenFromBackend({username, password})
@@ -34,7 +35,7 @@ export default function LoginPage() {
 		<Container className={classes.login}>
 			<Paper>
 
-				<form className={classes.form} onSubmit={(event) => refreshPage(event)}>
+				<form className={classes.form} onSubmit={(event) => handleLogin(event)}>
 					<Typography variant={"h4"} align={"center"}>Log in to rAdmin Tool</Typography>
 					<TextField
 						label="Email"

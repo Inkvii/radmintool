@@ -5,6 +5,16 @@ import {SearchIcon} from "@material-ui/data-grid"
 import {Link} from "react-router-dom"
 import {PATH_ROUTES} from "router/routes"
 
+/**
+ * Basic idea about custom bar was in this case idea that if we dont want to use TextField or Autocomplete (from Material UI),
+ * we must handle all the issues that will come.
+ * That means:
+ *  handling props
+ *  handling search comparator
+ *  handling how the dropdown listbox should look like and behave
+ *  binding location where popper of the listbox should appear and give it dimensions, behaviour etc.
+ * @constructor
+ */
 export default function CustomSearchBar() {
 
 	const [searchBarWidth, setSearchBarWidth] = useState<number>(100)

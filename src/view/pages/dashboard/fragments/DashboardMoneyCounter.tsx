@@ -1,66 +1,75 @@
 import {Button, Card, CardContent, Grid, Typography} from "@material-ui/core"
 import {ArrowDownward, ArrowUpward} from "@material-ui/icons"
 import React, {useEffect, useState} from "react"
-import SockJS from "sockjs-client"
-import Stomp from "stompjs"
+import {Client} from "stompjs"
 
 
-const sock = new SockJS("http://localhost:8080/radmintoolWebsocket")
-const stompClient = Stomp.over(sock)
-
-sock.onopen = () => {
-	console.log("Websocket opened")
-}
-sock.onclose = () => {
-	console.log("Websocket closed")
+interface Props {
+	stompClient?: Client,
+	isWebsocketConnected: boolean
 }
 
-
-export default function DashboardMoneyCounter() {
+/**
+ * Example of using websocket to render value from response.
+ * Value is fetched via websocket and stored as a state that will trigger rendering change
+ * @param props
+ * @constructor
+ */
+export default function DashboardMoneyCounter(props: Props) {
 
 	const [value, setValue] = useState(0)
 
-	// Connecting to stomp client requires handling in componentDidUpdate otherwise warning is issued
+	// Run after websocket is connected so we can subscribe to the topic
 	useEffect(() => {
-		stompClient.connect({}, frame => {
-			console.debug("Connected to websocket: " + frame)
+		if (!props.isWebsocketConnected) {
+			console.info("Websocket is not connected yet")
+			return
+		}
 
-			stompClient.subscribe("/topic/money", (message) => {
-				console.debug("Received message from /topic/money")
-				setValue(parseFloat(message.body))
-			})
-			stompClient.subscribe("/topic/test", (message) => {
-				console.log("Got text from /topic/test - " + message.body)
-			})
-		}, error => {
-			console.log("Error occurred " + error)
+		props.stompClient?.subscribe("/topic/money", (message) => {
+			console.debug("Received message from /topic/money")
+			setValue(parseFloat(message.body))
 		})
+	}, [props.isWebsocketConnected, props.stompClient])
 
-	}, [])
-
-
+	// Example of sending message to the backend. Outgoing messages are handled by /app controller whereas incoming messages
+	// are handled via /topic controller
 	const sendMessage = () => {
-		stompClient.send("/app/test", {}, "Testing message")
+		props.stompClient?.send("/app/test", {}, "Testing message")
 		console.info("Message sent")
+	}
+
+	// Example of differentiation between /topic/money and /app/money
+	const requestMoneyCounterUpdate = () => {
+		props.stompClient?.send("/app/money", {})
 	}
 
 	return (
 		<Card>
 			<CardContent>
 				<Grid container>
-					<Grid item xs>
-						<p>Money made today</p>
+					<Grid item xs={8}>
+						<Grid item xs={12}>
+							<p>Money made in last 5 minutes</p>
+						</Grid>
+						<Grid item xs={12}>
+							<Typography variant={"h2"} style={{color: value >= 0 ? "green" : "red"}}>
+								€ {value}
+								{value >= 0 ? <ArrowUpward/> : <ArrowDownward/>}
+							</Typography>
+						</Grid>
 					</Grid>
-					<Grid item xs>
-						<Typography variant={"h2"} style={{color: value >= 0 ? "green" : "red"}}>
-							€ {value}
-							{value >= 0 ? <ArrowUpward/> : <ArrowDownward/>}
-						</Typography>
-					</Grid>
-					<Grid item xs>
-						<Button onClick={() => {
-							sendMessage()
-						}}>Click</Button>
+					<Grid item xs={4}>
+						<Grid item xs={12}>
+							<Button fullWidth onClick={() => {
+								sendMessage()
+							}}>Click</Button>
+						</Grid>
+						<Grid item xs={12}>
+							<Button fullWidth onClick={() => {
+								requestMoneyCounterUpdate()
+							}}>Update</Button>
+						</Grid>
 					</Grid>
 				</Grid>
 			</CardContent>

@@ -4,6 +4,10 @@ import React from "react"
 import {useHistory} from "react-router-dom"
 import {PATH_ROUTES} from "router/routes"
 
+/**
+ * Profile button found on right hand side of the Menu. When user clicks on it, popover menu appears with list of options
+ * @constructor
+ */
 export default function ProfileButton() {
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 	const history = useHistory()

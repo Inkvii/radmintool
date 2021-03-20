@@ -18,6 +18,13 @@ type Props = {
 	rows: DataTableRow[]
 }
 
+/**
+ * This is an example of custom table that can handle cell with onClick method. It is very low level component but viable
+ * if DataGrid cant be used
+ * @param headers
+ * @param rows
+ * @constructor
+ */
 export default function DataTable({headers, rows}: Props) {
 
 	return (

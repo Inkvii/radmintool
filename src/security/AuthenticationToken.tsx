@@ -7,9 +7,16 @@ export enum Permission {
 	ADMIN_PAGE
 }
 
+/**
+ * Class handling token issuing and verification. Communicates with backend when token expires or user requests new token
+ * when login page form is issued
+ */
 export default class AuthenticationProvider {
+	// name of the key that will be used for local storage
 	public authenticationTokenName: string = "authenticationToken"
+	// currently active authentication token (in memory)
 	private authenticationToken: AuthenticationToken | null
+	// switcher that prevents issues from forming when user logs out
 	private isActive: boolean
 
 	constructor() {
@@ -111,6 +118,11 @@ export default class AuthenticationProvider {
 			})
 	}
 
+	/**
+	 * Checks that token received from backend, because previous token expired, is valid. If yes, saves it to local storage
+	 * @param token
+	 * @private
+	 */
 	private async checkBackendRenewedToken(token: AuthenticationToken | null): Promise<AuthenticationToken | null> {
 		if (AuthenticationProvider.checkTokenValidity(token)) {
 			this.authenticationToken = token

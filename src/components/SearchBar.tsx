@@ -4,6 +4,14 @@ import {createStyles, Grid, makeStyles, TextField, Theme, Typography} from "@mat
 import PathRouteClass, {PATH_ROUTES} from "router/routes"
 import {useHistory} from "react-router-dom"
 
+/**
+ * One of the more complex components in this project.
+ * Search bar is connected to PATH_ROUTES which contains all routing destinations.
+ * Search bar will over in its dropdown listbox only those paths that are searchable (to avoid showing paths where e.g. id is needed (clientOrganization/:id)
+ *
+ * Uses Material UI's Autocomplete component but modifies how dropdown listbox should look like.
+ * @constructor
+ */
 export default function SearchBar() {
 	const options = Object.values(PATH_ROUTES).filter(value => value.linkInfo.searchable)
 	const history = useHistory()

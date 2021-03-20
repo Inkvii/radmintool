@@ -23,15 +23,21 @@ export default function BasicInfo({organization}: Props) {
 		changedColumns.set(fieldName, changedValue)
 	}
 
+	/**
+	 * Example of communicating with backend
+	 */
 	const saveChanges = () => {
 		setEditMode(false)
 		const id = organization.id
 
+		// Transforming map to array. As the map contains all fields whose current values dont equal value provided by backend
+		// it would be pain to do manually
 		const payload = Array.from(changedColumns, ([name, value]) => ({name, value}))
 
 
 		console.debug(`Before sending: ${JSON.stringify(payload)}`)
 		if (payload.length < 1) {
+			// if there are no changes, dont bother backend
 			return
 		}
 
@@ -50,7 +56,12 @@ export default function BasicInfo({organization}: Props) {
 		})
 	}
 
-
+	/**
+	 * Example of editable text field
+	 * @param name
+	 * @param value
+	 * @constructor
+	 */
 	const CreateTableRow = (name: string, value: string | number) => (
 		<TableRow>
 			<TableCell align={"left"} style={{width: "50%"}} variant={"head"}>{name}</TableCell>

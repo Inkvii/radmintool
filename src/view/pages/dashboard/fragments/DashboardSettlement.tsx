@@ -3,6 +3,10 @@ import {Card, CardContent, Grid} from "@material-ui/core"
 import {Doughnut} from "react-chartjs-2"
 import React from "react"
 
+/**
+ * Example of showing graphs using react-chartjs-2
+ * @constructor
+ */
 export default function DashboardSettlement() {
 
 	const data = {
