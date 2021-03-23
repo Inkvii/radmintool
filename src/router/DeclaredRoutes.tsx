@@ -59,6 +59,7 @@ export default function DeclaredRoutes(props: Props) {
 				{createSimpleRoute(PATH_ROUTES.logout)}
 				{createSimpleRoute(PATH_ROUTES.index)}
 				{createSimpleRoute(PATH_ROUTES.restrictedPage)}
+				{createSimpleRoute(PATH_ROUTES.allTransactions)}
 
 
 			</Switch>

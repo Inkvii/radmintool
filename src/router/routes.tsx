@@ -10,6 +10,7 @@ import IndexPage from "view/pages/index/IndexPage"
 import {Permission} from "security/AuthenticationToken"
 import RestrictedPage from "view/pages/RestrictedPage"
 import PersonDetail from "view/pages/person/PersonDetail"
+import AllTransactionsPage from "../view/pages/longtable/AllTransactionsPage";
 
 /**
  * Class containing information about URI and if it shows in other components
@@ -128,6 +129,11 @@ export const PATH_ROUTES = {
 		new LinkInfo("/person", false),
 		new RouteDescription("Person detail", "Detail of one person", "Page contains information about person and their transaction history"),
 		PersonDetail,
+	),
+	"allTransactions": new PathRouteClass(
+		new LinkInfo("/alltransactions"),
+		new RouteDescription("All transactions", "all of them", "really all of the transactions"),
+		AllTransactionsPage
 	)
 }
 
